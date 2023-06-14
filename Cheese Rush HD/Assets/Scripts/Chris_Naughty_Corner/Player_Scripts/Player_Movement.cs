@@ -7,6 +7,7 @@ public class Player_Movement : MonoBehaviour
     //Movement Edit
     public float normalSpeed = 5.0f;
     public float boostedSpeed = 10.0f;
+    public float maxBoostedSpeed = 15.0f;
     public float boostDelay = 5.0f;
     private float boostTimer = 0.0f;
     public float jumpForce = 5.0f;
@@ -19,6 +20,7 @@ public class Player_Movement : MonoBehaviour
     //Camera Edit
     public float normalFOV = 60.0f;
     public float boostedFOV = 90.0f;
+    public float maxFOV = 120.0f;
     public float FOVTransitionTime = 1.0f;
     public float maxLookAngle = 0f;
 
@@ -91,16 +93,34 @@ public class Player_Movement : MonoBehaviour
         }
 
         // Boost
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+            if (!isBoosting)
+            {
+                isBoosting = true;
+                SetPlayerSpeed(boostedSpeed);
+            }
+        }
+        if (Input.GetKey(KeyCode.Q))
         {
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostDelay && !isBoosting)
             {
                 isBoosting = true;
-                SetPlayerSpeed(boostedSpeed);
+                SetPlayerSpeed(maxBoostedSpeed);
                 TransitionFOV(normalFOV, boostedFOV);
             }
         }
+        //if (Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    boostTimer += Time.deltaTime;
+        //    if (boostTimer >= boostDelay && !isBoosting)
+        //    {
+        //        isBoosting = true;
+        //        SetPlayerSpeed(boostedSpeed);
+        //        TransitionFOV(normalFOV, boostedFOV);
+        //    }
+        //}
         else
         {
             // Reset Boost
@@ -187,6 +207,7 @@ public class Player_Movement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+    //Groudn Check
     private void CheckGround()
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);

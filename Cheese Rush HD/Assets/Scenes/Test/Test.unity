@@ -25569,6 +25569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 15
   boostedSpeed: 30
+  maxBoostedSpeed: 45
   boostDelay: 2
   jumpForce: 15
   mouseSensitivity: 100
@@ -25579,6 +25580,7 @@ MonoBehaviour:
   lowJumpMultiplier: 10
   normalFOV: 60
   boostedFOV: 90
+  maxFOV: 120
   FOVTransitionTime: 1
   maxLookAngle: 10
 --- !u!136 &900852060
@@ -25676,7 +25678,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &900852065
 MonoBehaviour:
   m_ObjectHideFlags: 0
