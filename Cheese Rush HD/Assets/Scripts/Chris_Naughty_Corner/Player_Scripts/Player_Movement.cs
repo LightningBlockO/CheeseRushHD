@@ -14,10 +14,13 @@ public class Player_Movement : MonoBehaviour
     public float dashDistance = 10.0f;
     public float dashDuration = 0.1f;
     public float dashCooldown = 2.0f;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
     //Camera Edit
     public float normalFOV = 60.0f;
     public float boostedFOV = 90.0f;
     public float FOVTransitionTime = 1.0f;
+    public float maxLookAngle = 0f;
 
     //No touch
     private bool isBoosting = false;
@@ -26,6 +29,8 @@ public class Player_Movement : MonoBehaviour
     private Rigidbody rb;
     private bool isDashing = false;
     private bool canDash = true;
+    private float pitch = 0.0f;
+    private bool isGrounded = false;
     // Camera 
     private Camera playerCamera;
     private float initialFOV;
@@ -51,6 +56,7 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
+        CheckGround();
         // Movement
         float horizontalMovement = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
         float verticalMovement = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
@@ -65,10 +71,15 @@ public class Player_Movement : MonoBehaviour
         Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
 
+        // Restriction 
+        pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
+
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
+        if (Input.GetKey(KeyCode.Space) && !isDashing && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            Jump();
+            //rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         // Dash
@@ -113,6 +124,33 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        ApplyFallMultiplier();
+    }
+
+    private void Jump()
+    {
+        if (isGrounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            isGrounded = false;
+        }
+        
+    }
+
+    private void ApplyFallMultiplier()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+
     private void SetPlayerSpeed(float speed)
     {
         playerSpeed = speed;
@@ -148,6 +186,22 @@ public class Player_Movement : MonoBehaviour
     {
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    private void CheckGround()
+    {
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
+        Vector3 direction = transform.TransformDirection(Vector3.down);
+        float distance = .75f;
+
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+        {
+            Debug.DrawRay(origin, direction * distance, Color.red);
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 }
 
