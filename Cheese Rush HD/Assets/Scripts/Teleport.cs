@@ -7,6 +7,6 @@ public class Teleport : MonoBehaviour
     public GameObject player;
     private void OnTriggerExit(Collider other)
     {
-        player.transform.position = new Vector3(0, 1, 0);
+        player.transform.position = new Vector3(0, 4, 0);
     }
 }

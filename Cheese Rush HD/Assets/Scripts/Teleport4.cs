@@ -12,7 +12,7 @@ public class Teleport4 : MonoBehaviour
     public GameObject rushcheeselap2;
     private void OnTriggerEnter(Collider other)
     {
-        player.transform.position = new Vector3(698, 48, -761);
+        player.transform.position = new Vector3(698, 55, -761);
         lap2music.SetActive(true);
         cheeserushmusic.SetActive(false);
         lap2logo.SetActive(true);
