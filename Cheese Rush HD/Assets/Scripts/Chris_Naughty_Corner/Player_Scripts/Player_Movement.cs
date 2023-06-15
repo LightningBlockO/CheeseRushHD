@@ -4,47 +4,77 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
+    #region Movement Variables
     //Movement Edit
+    [Header("Movement")]
     public float normalSpeed = 5.0f;
     public float boostedSpeed = 10.0f;
     public float maxBoostedSpeed = 15.0f;
-    public float boostDelay = 5.0f;
+    public float boostDelay = 0.0f;
+    public float maxBoostDelay = 0.0f;
     private float boostTimer = 0.0f;
-    public float jumpForce = 5.0f;
+    private float maxBoostTimer = 0.0f;
     public float mouseSensitivity = 100.0f;
+    public float maxVelocityChange = 10f;
+    #endregion
+    #region Dash
+    //Dash
+    [Header("Dash")]
     public float dashDistance = 10.0f;
     public float dashDuration = 0.1f;
     public float dashCooldown = 2.0f;
+    #endregion
+    #region Jump
+    //Jump
+    [Header("Jump")]
+    public float jumpForce = 5.0f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    #endregion
+    #region AirControl
+
+    //Air control
+    private bool isFalling = false;
+    private float airTimer = 0f;
+    private float maxAirTime = 0.2f;
+    #endregion
+    #region Camera
     //Camera Edit
+    [Header("Camer-FOV")]
     public float normalFOV = 60.0f;
     public float boostedFOV = 90.0f;
     public float maxFOV = 120.0f;
     public float FOVTransitionTime = 1.0f;
     public float maxLookAngle = 0f;
-
+    #endregion
+    #region Dont Touch
     //No touch
     private bool isBoosting = false;
+    private bool isMaxBoosting = false;
     private float playerSpeed;
     private float verticalRotation = 0.0f;
     private Rigidbody rb;
     private bool isDashing = false;
+    private bool isJumping = false;
     private bool canDash = true;
     private float pitch = 0.0f;
     private bool isGrounded = false;
+
     // Camera 
     private Camera playerCamera;
     private float initialFOV;
     private float targetFOV;
     private float fovTransitionTimer;
 
+    #endregion
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerCamera = Camera.main;
         playerSpeed = normalSpeed;
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -52,36 +82,100 @@ public class Player_Movement : MonoBehaviour
         initialFOV = playerCamera.fieldOfView;
         targetFOV = initialFOV;
         fovTransitionTimer = 0.0f;
-        isDashing=false;
+        isDashing = false;
+        isJumping = false;
 
+    }
+    private void FixedUpdate()
+    {
+        ApplyFallMultiplier();
     }
 
     void Update()
     {
+        #region Movement
         CheckGround();
         // Movement
-        float horizontalMovement = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
-        float verticalMovement = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
 
-        transform.Translate(horizontalMovement, 0, verticalMovement);
+        //float horizontalMovement = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
+        //float verticalMovement = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
+        //transform.Translate(horizontalMovement, 0, verticalMovement);
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0; // Project onto the horizontal plane (omit vertical component)
+        cameraForward.Normalize(); // Normalize the vector to ensure consistent speed
+
+        Vector3 cameraRight = Camera.main.transform.right;
+        cameraRight.y = 0; // Project onto the horizontal plane (omit vertical component)
+        cameraRight.Normalize();
+
+        Vector3 targetVelocity = (cameraForward * Input.GetAxis("Vertical") + cameraRight * Input.GetAxis("Horizontal")) * playerSpeed;
+        Vector3 currentVelocity = rb.velocity;
+        Vector3 velocityChange = Vector3.ClampMagnitude(targetVelocity - currentVelocity, maxVelocityChange);
+        velocityChange.y = 0;
+
+        float smoothFactor = 0.5f; // Adjust this value for desired smoothness
+
+        rb.velocity = Vector3.Lerp(currentVelocity, currentVelocity + velocityChange, smoothFactor);
+
+
+
+
+        //float horizontalMovement = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
+        //float verticalMovement = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
+
+        //transform.Translate(horizontalMovement, 0, verticalMovement);
+
+        //Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //Vector3 velocity = rb.velocity;
+        //Vector3 velocityChange = (targetVelocity - velocity);
+        //velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+        //velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+        //velocityChange.y = 0;
+
+        //rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        #endregion
+        #region Camera
 
         // Camera
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
         Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
 
+        
+
         // Restriction 
         pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
+        #endregion
+        #region Jump
+
 
         // Jump
-        if (Input.GetKey(KeyCode.Space) && !isDashing && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && !isDashing && isGrounded)
         {
             Jump();
+
             //rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+        //Air Control
+        if (!isGrounded && !isDashing && isJumping)
+        {
+            airTimer += Time.deltaTime;
+
+            if (airTimer >= maxAirTime)
+            {
+                FallToGround();
+                //Debug.Log("Fall");
+            }
+        }
+        else
+        {
+            airTimer = 0f;
         }
 
         // Dash
@@ -91,44 +185,53 @@ public class Player_Movement : MonoBehaviour
             StartCoroutine(Dash(dashDirection, dashDistance, dashDuration));
             StartCoroutine(DashCooldown());
         }
-
+        #endregion
+        #region Boost
         // Boost
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
-        {
-            if (!isBoosting)
-            {
-                isBoosting = true;
-                SetPlayerSpeed(boostedSpeed);
-            }
-        }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.LeftShift) /*&& Input.GetKey(KeyCode.W)*/)
         {
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostDelay && !isBoosting)
             {
                 isBoosting = true;
-                SetPlayerSpeed(maxBoostedSpeed);
-                TransitionFOV(normalFOV, boostedFOV);
+                SetPlayerSpeed(boostedSpeed);
+                TransitionFOV(normalFOV, normalFOV);
+                Debug.Log("Moch1");
+
+            }
+
+            else
+            {
+                // Reset Boost
+                boostTimer = 0.0f;
+
+                if (isBoosting)
+                {
+                    isBoosting = false;
+                    SetPlayerSpeed(normalSpeed);
+                    TransitionFOV(normalFOV, normalFOV);
+                }
             }
         }
-        //if (Input.GetKey(KeyCode.Mouse0))
-        //{
-        //    boostTimer += Time.deltaTime;
-        //    if (boostTimer >= boostDelay && !isBoosting)
-        //    {
-        //        isBoosting = true;
-        //        SetPlayerSpeed(boostedSpeed);
-        //        TransitionFOV(normalFOV, boostedFOV);
-        //    }
-        //}
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+            maxBoostTimer += Time.deltaTime;
+            if (maxBoostTimer >= maxBoostDelay && !isMaxBoosting)
+            {
+                isMaxBoosting = true;
+                SetPlayerSpeed(maxBoostedSpeed);
+                TransitionFOV(normalFOV, boostedFOV);
+                Debug.Log("Mock2");
+            }
+        }
         else
         {
             // Reset Boost
-            boostTimer = 0.0f;
+            maxBoostTimer = 0.0f;
 
-            if (isBoosting)
+            if (isMaxBoosting)
             {
-                isBoosting = false;
+                isMaxBoosting = false;
                 SetPlayerSpeed(normalSpeed);
                 TransitionFOV(boostedFOV, normalFOV);
             }
@@ -143,20 +246,56 @@ public class Player_Movement : MonoBehaviour
             playerCamera.fieldOfView = newFOV;
         }
     }
+    #endregion
 
-    private void FixedUpdate()
+    private void FallToGround()
     {
-        ApplyFallMultiplier();
+        Vector3 desiredPosition = transform.position - Vector3.up * Time.deltaTime;
+        rb.MovePosition(desiredPosition);
     }
 
     private void Jump()
     {
         if (isGrounded)
         {
+            isJumping = true;
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce * 0f, ForceMode.Impulse);
             isGrounded = false;
         }
-        
+        //if (!isGrounded && !isDashing && !isJumping)
+        //{
+        //    airTimer += Time.deltaTime;
+
+        //    if (airTimer >= maxAirTime)
+        //    {
+        //        FallToGround();
+        //    }
+        //}
+        //else
+        //{
+        //    airTimer = 0f;
+        //}
+        //float jumpHeight = transform.position.y + jumpForce;
+
+        //if (jumpHeight > maxJumpHeight)
+        //{
+        //    jumpHeight = maxJumpHeight;
+        //}
+
+        //rb.velocity = new Vector3(rb.velocity.x, jumpHeight - transform.position.y, rb.velocity.z);
+        //isGrounded = false;
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("bababababa");
+            Vector3 desiredPosition = rb.position - collision.relativeVelocity * Time.fixedDeltaTime;
+
+            rb.MovePosition(desiredPosition);
+        }
     }
 
     private void ApplyFallMultiplier()
@@ -225,48 +364,3 @@ public class Player_Movement : MonoBehaviour
         }
     }
 }
-
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    isWalking = true;
-        //    Walk.Play();
-        //}
-
-//if (Input.GetKeyUp(KeyCode.W))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.A))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.A))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.S))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.S))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.D))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-//if (Input.GetKeyUp(KeyCode.D))
-//{
-//    isWalking = false;
-//    Walk.Stop();
-//}
-
-
