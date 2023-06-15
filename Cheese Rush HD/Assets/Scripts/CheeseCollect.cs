@@ -16,6 +16,14 @@ public class CheeseCollect : MonoBehaviour
     public GameObject transparentlap2;
     public GameObject cheeserushmusic;
     public GameObject levelmusic;
+    public GameObject rankD;
+    public GameObject rankC;
+    public GameObject rankB;
+    public GameObject rankA;
+    public GameObject rankS;
+    public GameObject ranklap1;
+    public GameObject ranklap2;
+    public GameObject ranklap3;
 
     [SerializeField]
     private int score = 0;
@@ -38,6 +46,8 @@ public class CheeseCollect : MonoBehaviour
         {
             score += 1000;
             gameObject.GetComponent<AudioSource>().Play();
+            ranklap1.SetActive(false);
+            ranklap2.SetActive(true);
         }
         if (other.name.Contains("Final"))
         {
@@ -53,6 +63,26 @@ public class CheeseCollect : MonoBehaviour
             transparentlap2.SetActive(false);
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
+        }
+        if (score >= 1500)
+        {
+            rankD.SetActive(false);
+            rankC.SetActive(true);
+        }
+        if (score >= 3000)
+        {
+            rankC.SetActive(false);
+            rankB.SetActive(true);
+        }
+        if (score >= 5000)
+        {
+            rankB.SetActive(false);
+            rankA.SetActive(true);
+        }
+        if (score >= 7000)
+        {
+            rankA.SetActive(false);
+            rankS.SetActive(true);
         }
         myScore.text = score.ToString();
     }
