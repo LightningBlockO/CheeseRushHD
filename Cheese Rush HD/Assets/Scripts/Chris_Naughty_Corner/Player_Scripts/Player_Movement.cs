@@ -23,6 +23,7 @@ public class Player_Movement : MonoBehaviour
     public float dashDistance = 10.0f;
     public float dashDuration = 0.1f;
     public float dashCooldown = 2.0f;
+    public LayerMask obstacleLayer;
     #endregion
     #region Jump
     //Jump
@@ -321,7 +322,26 @@ public class Player_Movement : MonoBehaviour
         targetFOV = endFOV;
         fovTransitionTimer = 0.0f;
     }
-    private System.Collections.IEnumerator Dash(Vector3 direction, float distance, float duration)
+    //private System.Collections.IEnumerator Dash(Vector3 direction, float distance, float duration)
+    //{
+    //    isDashing = true;
+    //    canDash = false;
+    //    float elapsedTime = 0.0f;
+    //    Vector3 initialPosition = transform.position;
+    //    Vector3 targetPosition = initialPosition + direction * distance;
+
+    //    while (elapsedTime < duration)
+    //    {
+    //        float t = elapsedTime / duration;
+    //        transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
+
+    //    transform.position = targetPosition;
+    //    isDashing = false;
+    //}
+    private IEnumerator Dash(Vector3 direction, float distance, float duration)
     {
         isDashing = true;
         canDash = false;
@@ -334,13 +354,18 @@ public class Player_Movement : MonoBehaviour
             float t = elapsedTime / duration;
             transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
             elapsedTime += Time.deltaTime;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, direction, out hit, distance, obstacleLayer))
+            {
+                targetPosition = hit.point;
+                break;
+            }
             yield return null;
         }
 
         transform.position = targetPosition;
         isDashing = false;
     }
-
     private System.Collections.IEnumerator DashCooldown()
     {
         yield return new WaitForSeconds(dashCooldown);
