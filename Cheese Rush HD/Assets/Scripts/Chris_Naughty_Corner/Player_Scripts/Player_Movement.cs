@@ -24,6 +24,7 @@ public class Player_Movement : MonoBehaviour
     public float dashDuration = 0.1f;
     public float dashCooldown = 2.0f;
     public LayerMask obstacleLayer;
+    public bool IsDashing { get; private set; }
     #endregion
     #region Jump
     //Jump
