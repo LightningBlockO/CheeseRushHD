@@ -36,16 +36,13 @@ public class Enemy_Movement : MonoBehaviour
         {
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         }
-    }
-     // Reference to the player's dashing script
-
-    
+    }   
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && playerDash.IsDashing)
         {
-            Destroy(gameObject); // Destroy the enemy object
+            Destroy(gameObject); 
         }
     }
 }

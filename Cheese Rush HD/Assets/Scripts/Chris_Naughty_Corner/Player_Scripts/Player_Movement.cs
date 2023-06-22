@@ -32,6 +32,7 @@ public class Player_Movement : MonoBehaviour
     public float jumpForce = 5.0f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    public LayerMask groundLayerMask;
     #endregion
     #region AirControl
 
@@ -97,18 +98,13 @@ public class Player_Movement : MonoBehaviour
     {
         #region Movement
         CheckGround();
-        // Movement
-
-        //float horizontalMovement = Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime;
-        //float verticalMovement = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
-        //transform.Translate(horizontalMovement, 0, verticalMovement);
 
         Vector3 cameraForward = Camera.main.transform.forward;
-        cameraForward.y = 0; // Project onto the horizontal plane (omit vertical component)
-        cameraForward.Normalize(); // Normalize the vector to ensure consistent speed
+        cameraForward.y = 0;
+        cameraForward.Normalize(); 
 
         Vector3 cameraRight = Camera.main.transform.right;
-        cameraRight.y = 0; // Project onto the horizontal plane (omit vertical component)
+        cameraRight.y = 0; 
         cameraRight.Normalize();
 
         Vector3 targetVelocity = (cameraForward * Input.GetAxis("Vertical") + cameraRight * Input.GetAxis("Horizontal")) * playerSpeed;
@@ -116,7 +112,7 @@ public class Player_Movement : MonoBehaviour
         Vector3 velocityChange = Vector3.ClampMagnitude(targetVelocity - currentVelocity, maxVelocityChange);
         velocityChange.y = 0;
 
-        float smoothFactor = 0.5f; // Adjust this value for desired smoothness
+        float smoothFactor = 0.5f;
 
         rb.velocity = Vector3.Lerp(currentVelocity, currentVelocity + velocityChange, smoothFactor);
 
@@ -159,22 +155,20 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isDashing && isGrounded)
         {
             Jump();
-
-            //rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            Debug.Log("hdashdjsajsahd");
         }
 
         //Air Control
-        if (!isGrounded && !isDashing && isJumping)
-        {
-            airTimer += Time.deltaTime;
+        //if (!isGrounded && !isDashing && isJumping)
+        //{
+        //    airTimer += Time.deltaTime;
 
-            if (airTimer >= maxAirTime)
-            {
-                FallToGround();
-                //Debug.Log("Fall");
-            }
-        }
+        //    if (airTimer >= maxAirTime)
+        //    {
+        //        FallToGround();
+        //        //Debug.Log("Fall");
+        //    }
+        //}
         else
         {
             airTimer = 0f;
@@ -375,11 +369,11 @@ public class Player_Movement : MonoBehaviour
     //Groudn Check
     private void CheckGround()
     {
-        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
+        Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = .75f;
-
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+        float distance = 10f;
+        Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
+        if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
             Debug.DrawRay(origin, direction * distance, Color.red);
             isGrounded = true;
