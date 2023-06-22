@@ -50,6 +50,10 @@ public class Player_Movement : MonoBehaviour
     public float FOVTransitionTime = 1.0f;
     public float maxLookAngle = 0f;
     #endregion
+    #region Animations
+    [Header("Animations")]
+    private Animator animator;
+    #endregion
     #region Dont Touch
     //No touch
     private bool isBoosting = false;
@@ -87,6 +91,8 @@ public class Player_Movement : MonoBehaviour
         fovTransitionTimer = 0.0f;
         isDashing = false;
         isJumping = false;
+
+        animator = GetComponent<Animator>();
 
     }
     private void FixedUpdate()
@@ -180,10 +186,58 @@ public class Player_Movement : MonoBehaviour
             Vector3 dashDirection = transform.forward;
             StartCoroutine(Dash(dashDirection, dashDistance, dashDuration));
             StartCoroutine(DashCooldown());
+            
         }
+        
+
+        #endregion
+        #region Animations
+        bool isWalking = Input.GetKey(KeyCode.W);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        //bool isPunching = Input.GetKey(KeyCode.Mouse0);
+        //bool isMach = Input.GetKey(KeyCode.Mouse1);
+
+        if (isRunning)
+        {
+            animator.SetBool("IsRunning", true);
+            animator.SetBool("IsWalking", false);
+            ////animator.SetBool("IsMach", false);
+            //animator.SetBool("IsPunch", false);
+        }
+        else if (isWalking)
+        {
+            animator.SetBool("IsWalking", true);
+            animator.SetBool("IsRunning", false);
+            //animator.SetBool("IsPunch", false);
+            //animator.SetBool("IsMach", false);
+        }
+        //else if (isPunching)
+        //{
+        //    animator.SetBool("IsPunch", true);
+        //    animator.SetBool("IsWalking", false);
+        //    animator.SetBool("IsRunning", false);
+            
+        //    //animator.SetBool("IsMach", false);
+        //}
+        //else if (isMach)
+        //{
+        //    animator.SetBool("IsMach", true);
+        //    animator.SetBool("IsWalking", false);
+        //    animator.SetBool("IsRunning", false);
+        //}
+        else
+        {
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
+            //animator.SetBool("IsPunch", false);
+            //animator.SetBool("IsMach", false);
+        }
+
         #endregion
         #region Boost
-        // Boost
+        // Boost       
+
+
         if (Input.GetKeyDown(KeyCode.LeftShift) /*&& Input.GetKey(KeyCode.W)*/)
         {
             boostTimer += Time.deltaTime;
@@ -193,6 +247,8 @@ public class Player_Movement : MonoBehaviour
                 SetPlayerSpeed(boostedSpeed);
                 TransitionFOV(normalFOV, normalFOV);
                 Debug.Log("Moch1");
+
+                
 
             }
 
@@ -244,6 +300,16 @@ public class Player_Movement : MonoBehaviour
     }
     #endregion
 
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && isDashing || isMaxBoosting)
+        {
+            Destroy(other.gameObject);
+        }
+    }
+    
     private void FallToGround()
     {
         Vector3 desiredPosition = transform.position - Vector3.up * Time.deltaTime;
@@ -343,6 +409,7 @@ public class Player_Movement : MonoBehaviour
         float elapsedTime = 0.0f;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = initialPosition + direction * distance;
+        
 
         while (elapsedTime < duration)
         {
@@ -371,7 +438,7 @@ public class Player_Movement : MonoBehaviour
     {
         Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 10f;
+        float distance = 3f;
         Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
         if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
