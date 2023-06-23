@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -326,6 +327,8 @@ public class Player_Movement : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce * 0f, ForceMode.Impulse);
             isGrounded = false;
+            Analytics.CustomEvent("Jump");
+            Debug.Log("event has sent");
         }
         //if (!isGrounded && !isDashing && !isJumping)
         //{
