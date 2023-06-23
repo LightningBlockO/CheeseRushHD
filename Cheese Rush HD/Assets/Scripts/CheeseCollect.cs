@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using TMPro;
 
 public class CheeseCollect : MonoBehaviour
@@ -35,6 +36,8 @@ public class CheeseCollect : MonoBehaviour
             score += 10;
             gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
+            Analytics.CustomEvent("CheeseCollect");
+            Debug.Log("Cheese Hopefully Tracked");
         }
         if (other.name.Contains("Large"))
         {
