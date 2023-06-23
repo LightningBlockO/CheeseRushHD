@@ -54,6 +54,7 @@ public class Player_Movement : MonoBehaviour
     [Header("Animations")]
     private Animator animator;
     #endregion
+    public GameObject babab;
     #region Dont Touch
     //No touch
     private bool isBoosting = false;
@@ -304,8 +305,9 @@ public class Player_Movement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && isDashing || isMaxBoosting)
+        if (other.CompareTag("Enemy") && (isDashing || isMaxBoosting))
         {
+            Debug.Log("roinalds gay");
             Destroy(other.gameObject);
         }
     }
@@ -439,7 +441,7 @@ public class Player_Movement : MonoBehaviour
         Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
         float distance = 3f;
-        Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
+        //Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
         if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
             Debug.DrawRay(origin, direction * distance, Color.red);

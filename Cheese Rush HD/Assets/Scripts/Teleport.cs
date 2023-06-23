@@ -9,4 +9,9 @@ public class Teleport : MonoBehaviour
     {
         player.transform.position = new Vector3(0, 4, 0);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    player.transform.position = new Vector3(0, 4, 0);
+    //}
 }
