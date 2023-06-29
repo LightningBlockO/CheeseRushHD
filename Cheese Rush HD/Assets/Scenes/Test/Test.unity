@@ -25627,6 +25627,7 @@ MonoBehaviour:
   maxFOV: 120
   FOVTransitionTime: 1
   maxLookAngle: 10
+  babab: {fileID: 0}
 --- !u!136 &900852060
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -58982,6 +58983,22 @@ PrefabInstance:
     - target: {fileID: 309588390580690944, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
       propertyPath: m_Name
       value: Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: jumpForce
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: maxJumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: fallMultiplier
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: lowJumpMultiplier
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 309588390580690949, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
       propertyPath: m_RootOrder

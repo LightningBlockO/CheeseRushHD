@@ -54,6 +54,13 @@ public class Player_Movement : MonoBehaviour
     #region Animations
     [Header("Animations")]
     private Animator animator;
+    private bool isWalking;
+    private bool isRunning;
+    private bool isMach;
+    private bool isPunch;
+    private bool isShiftHeld;
+    private float shiftHoldTime;
+    private const float MachAnimationThreshold = 2f;
     #endregion
     public GameObject babab;
     #region Dont Touch
@@ -157,14 +164,15 @@ public class Player_Movement : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
         #endregion
         #region Jump
-
+        Debug.Log(isGrounded);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && !isDashing && isGrounded)
         {
             Jump();
-            Debug.Log("hdashdjsajsahd");
+
         }
+        
 
         //Air Control
         //if (!isGrounded && !isDashing && isJumping)
@@ -190,50 +198,63 @@ public class Player_Movement : MonoBehaviour
             StartCoroutine(DashCooldown());
             
         }
-        
+
 
         #endregion
         #region Animations
-        bool isWalking = Input.GetKey(KeyCode.W);
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        //bool isPunching = Input.GetKey(KeyCode.Mouse0);
-        //bool isMach = Input.GetKey(KeyCode.Mouse1);
+        bool isWalkingInput = Input.GetKey(KeyCode.W);
+        bool isRunningInput = Input.GetKey(KeyCode.LeftShift);
+        bool isPunchInput = Input.GetMouseButtonDown(0);
 
-        if (isRunning)
+        if (isRunningInput)
         {
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("IsWalking", false);
-            ////animator.SetBool("IsMach", false);
-            //animator.SetBool("IsPunch", false);
+            isShiftHeld = true;
+            shiftHoldTime += Time.deltaTime;
+
+            if (shiftHoldTime >= MachAnimationThreshold)
+            {
+                isMach = true;
+                isWalking = false;
+                isRunning = false;
+            }
+            else
+            {
+                isMach = false;
+                isWalking = false;
+                isRunning = true;
+            }
         }
-        else if (isWalking)
+        else if (isWalkingInput)
         {
-            animator.SetBool("IsWalking", true);
-            animator.SetBool("IsRunning", false);
-            //animator.SetBool("IsPunch", false);
-            //animator.SetBool("IsMach", false);
+            ResetShiftHoldTime();
+            isShiftHeld = false;
+            isWalking = true;
+            isRunning = false;
+            isMach = false;
         }
-        //else if (isPunching)
-        //{
-        //    animator.SetBool("IsPunch", true);
-        //    animator.SetBool("IsWalking", false);
-        //    animator.SetBool("IsRunning", false);
-            
-        //    //animator.SetBool("IsMach", false);
-        //}
-        //else if (isMach)
-        //{
-        //    animator.SetBool("IsMach", true);
-        //    animator.SetBool("IsWalking", false);
-        //    animator.SetBool("IsRunning", false);
-        //}
         else
         {
-            animator.SetBool("IsWalking", false);
-            animator.SetBool("IsRunning", false);
-            //animator.SetBool("IsPunch", false);
-            //animator.SetBool("IsMach", false);
+            ResetShiftHoldTime();
+            isShiftHeld = false;
+            isWalking = false;
+            isRunning = false;
+            isMach = false;
         }
+
+        if (isPunchInput)
+        {
+            isPunch = true;
+            Invoke(nameof(ResetPunch), 0.1f); // Reset punch animation after a short delay
+        }
+        else
+        {
+            isPunch = false;
+        }
+
+        animator.SetBool("IsWalking", isWalking);
+        animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsMach", isMach);
+        animator.SetBool("IsPunch", isPunch);
 
         #endregion
         #region Boost
@@ -302,16 +323,26 @@ public class Player_Movement : MonoBehaviour
     }
     #endregion
 
-    
 
+
+    private void ResetShiftHoldTime()
+    {
+        shiftHoldTime = 0f;
+    }
+
+    private void ResetPunch()
+    {
+        isPunch = false;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") && (isDashing || isMaxBoosting))
         {
-            Debug.Log("roinalds gay");
+            Debug.Log("Killed Enemy");
             Destroy(other.gameObject);
         }
     }
+
     
     private void FallToGround()
     {
@@ -325,11 +356,12 @@ public class Player_Movement : MonoBehaviour
         {
             isJumping = true;
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-            rb.AddForce(transform.up * jumpForce * 0f, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Force);
             isGrounded = false;
             Analytics.CustomEvent("Jump");
             Debug.Log("event has sent");
         }
+        #region AirTimer
         //if (!isGrounded && !isDashing && !isJumping)
         //{
         //    airTimer += Time.deltaTime;
@@ -352,13 +384,13 @@ public class Player_Movement : MonoBehaviour
 
         //rb.velocity = new Vector3(rb.velocity.x, jumpHeight - transform.position.y, rb.velocity.z);
         //isGrounded = false;
-
+        #endregion
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("bababababa");
+            Debug.Log("Hitting Wall");
             Vector3 desiredPosition = rb.position - collision.relativeVelocity * Time.fixedDeltaTime;
 
             rb.MovePosition(desiredPosition);
@@ -367,7 +399,7 @@ public class Player_Movement : MonoBehaviour
 
     private void ApplyFallMultiplier()
     {
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 8)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
@@ -443,11 +475,11 @@ public class Player_Movement : MonoBehaviour
     {
         Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 3f;
+        float distance = 2.3f;
         //Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
         if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
-            Debug.DrawRay(origin, direction * distance, Color.red);
+            Debug.DrawRay(origin, direction * distance, Color.cyan);
             isGrounded = true;
         }
         else
