@@ -202,7 +202,7 @@ public class Player_Movement : MonoBehaviour
 
         #endregion
         #region Animations
-        bool isWalkingInput = Input.GetKey(KeyCode.W);
+        bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         bool isRunningInput = Input.GetKey(KeyCode.LeftShift);
         bool isPunchInput = Input.GetMouseButtonDown(0);
 

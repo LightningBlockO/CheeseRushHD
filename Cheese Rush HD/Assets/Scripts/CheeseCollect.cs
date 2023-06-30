@@ -27,10 +27,13 @@ public class CheeseCollect : MonoBehaviour
     public GameObject ranklap3;
 
     [SerializeField]
-    private int score = 0;
+    public int score {get; private set;}
 
     private void OnTriggerEnter(Collider other)
     {
+
+        //Points
+
         if (other.name.Contains("Cheese"))
         {
             score += 10;
@@ -67,17 +70,20 @@ public class CheeseCollect : MonoBehaviour
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
         }
-        if (score >= 1500)
+
+        //Ranks
+
+        if (score >= 1500 && score < 3000)
         {
             rankD.SetActive(false);
             rankC.SetActive(true);
         }
-        if (score >= 3000)
+        if (score >= 3000 && score <5000)
         {
             rankC.SetActive(false);
             rankB.SetActive(true);
         }
-        if (score >= 5000)
+        if (score >= 5000 && score <7000)
         {
             rankB.SetActive(false);
             rankA.SetActive(true);

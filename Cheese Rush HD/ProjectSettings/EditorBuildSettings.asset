@@ -7,14 +7,26 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Prototype/Menu Scene.unity
-    guid: 2fb78bd60ccb2ca40a0bd9b683c0d227
+    guid: 80dedaa0b1d6d934d9c4935eb23c7e83
   - enabled: 1
     path: Assets/Scenes/Prototype/CRHD Prototype.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Prototype/Win Scene.unity
-    guid: 18cb27fba99fae149976e9391bf7e59d
-  - enabled: 1
     path: Assets/Scenes/Prototype/Lose Scene.unity
     guid: 14c30edfc4f707c469efa5882cf475ff
+  - enabled: 1
+    path: Assets/Scenes/Prototype/Rank D.unity
+    guid: 4333d596ced228b41a7bc25ca7c3e8b7
+  - enabled: 1
+    path: Assets/Scenes/Prototype/Rank C.unity
+    guid: 2a34748141fa01a48a4fe92a877d69f4
+  - enabled: 1
+    path: Assets/Scenes/Prototype/Rank B.unity
+    guid: a537d56f45f0c104696790465b05e77b
+  - enabled: 1
+    path: Assets/Scenes/Prototype/Rank A.unity
+    guid: f19be83b571529249b61dee5fe765e10
+  - enabled: 1
+    path: Assets/Scenes/Prototype/Rank S.unity
+    guid: 07f994ed969521e428e17f3804e06428
   m_configObjects: {}
