@@ -31,7 +31,31 @@ public class CheeseCollect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        #region Enemy Reduce Points
+        //Enemy Reduce Points
+        if (other.name.Contains("Knife"))
+        {
+            score -= 50;
+            //gameObject.GetComponent<AudioSource>().Play();
+            Destroy(other.gameObject);
+        }
+        if (other.name.Contains("Fork"))
+        {
+            score -= 50;
+            //gameObject.GetComponent<AudioSource>().Play();
+            Destroy(other.gameObject);
+        }
+        if (other.name.Contains("Plate"))
+        {
+            score -= 50;
+            //gameObject.GetComponent<AudioSource>().Play();
+            Destroy(other.gameObject);
+        }
+        #endregion
 
+
+
+        #region Points
         //Points
 
         if (other.name.Contains("Cheese"))
@@ -70,7 +94,9 @@ public class CheeseCollect : MonoBehaviour
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
         }
+        #endregion
 
+        #region Ranks
         //Ranks
 
         if (score >= 1500 && score < 3000)
@@ -95,4 +121,5 @@ public class CheeseCollect : MonoBehaviour
         }
         myScore.text = score.ToString();
     }
+    #endregion
 }
