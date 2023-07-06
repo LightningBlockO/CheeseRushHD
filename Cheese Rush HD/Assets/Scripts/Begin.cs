@@ -11,5 +11,9 @@ public class Begin : MonoBehaviour
         {
             SceneManager.LoadScene("CRHD Prototype");
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SceneManager.LoadScene("Test_Kitchen");
+        }
     }
 }
