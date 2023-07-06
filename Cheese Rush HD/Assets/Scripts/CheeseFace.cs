@@ -5,7 +5,7 @@ public class CheeseFace : MonoBehaviour
     public Transform player;  // Reference to the player's transform
     public float movementSpeed = 5f;  // Speed at which CheeseFace follows the player
 
-    private void Update()
+    void Update()
     {
         if (player != null)
         {
