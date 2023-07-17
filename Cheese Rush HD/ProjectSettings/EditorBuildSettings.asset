@@ -6,30 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototype/Menu Scene.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Menu Scene.unity
     guid: 80dedaa0b1d6d934d9c4935eb23c7e83
   - enabled: 1
-    path: Assets/Scenes/Prototype/CRHD Prototype.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/CRHD Prototype.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Prototype/Lose Scene.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Lose Scene.unity
     guid: 14c30edfc4f707c469efa5882cf475ff
   - enabled: 1
-    path: Assets/Scenes/Prototype/Rank D.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Rank D.unity
     guid: 4333d596ced228b41a7bc25ca7c3e8b7
   - enabled: 1
-    path: Assets/Scenes/Prototype/Rank C.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Rank C.unity
     guid: 2a34748141fa01a48a4fe92a877d69f4
   - enabled: 1
-    path: Assets/Scenes/Prototype/Rank B.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Rank B.unity
     guid: a537d56f45f0c104696790465b05e77b
   - enabled: 1
-    path: Assets/Scenes/Prototype/Rank A.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Rank A.unity
     guid: f19be83b571529249b61dee5fe765e10
   - enabled: 1
-    path: Assets/Scenes/Prototype/Rank S.unity
+    path: Assets/Scenes/Starting Weeks/Prototype/Rank S.unity
     guid: 07f994ed969521e428e17f3804e06428
   - enabled: 1
-    path: Assets/Scenes/Test/Test_Kitchen.unity
+    path: Assets/Scenes/Starting Weeks/Test/Test_Kitchen.unity
     guid: 76cda6fca1bc4c34b92e6b5fa524e280
   m_configObjects: {}
