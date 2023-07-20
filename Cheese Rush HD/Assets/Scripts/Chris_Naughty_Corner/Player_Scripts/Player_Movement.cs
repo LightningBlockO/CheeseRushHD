@@ -204,7 +204,7 @@ public class Player_Movement : MonoBehaviour
         #region Animations
         bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         bool isRunningInput = Input.GetKey(KeyCode.LeftShift);
-        bool isPunchInput = Input.GetKey(KeyCode.Mouse0);
+        bool isPunchInput = Input.GetMouseButton(0);
 
         if (isRunningInput)
         {
@@ -246,10 +246,10 @@ public class Player_Movement : MonoBehaviour
             isPunch = true;
             Invoke(nameof(ResetPunch), 0.1f); // Reset punch animation after a short delay
         }
-        else
-        {
-            isPunch = false;
-        }
+        //else
+        //{
+        //    isPunch = false;
+        //}
 
         animator.SetBool("IsWalking", isWalking);
         animator.SetBool("IsRunning", isRunning);
