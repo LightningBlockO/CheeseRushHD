@@ -8,6 +8,7 @@ using TMPro;
 public class CheeseCollect : MonoBehaviour
 {
     public TextMeshProUGUI myScore;
+    public TextMeshProUGUI highScore;
     public GameObject timer;
     public GameObject cheeserush;
     public GameObject finishline;
@@ -29,26 +30,38 @@ public class CheeseCollect : MonoBehaviour
     [SerializeField]
     public int score {get; private set;}
 
+
+
+
+    public void Start()
+    {
+        highScore.text = PlayerPrefs.GetInt("HighScore",0).ToString();
+    }
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.O))
+        {
+            PlayerPrefs.DeleteAll();
+            highScore.text = "0";
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         #region Enemy Reduce Points
-        //Enemy Reduce Points
         if (other.name.Contains("Knife"))
         {
             score -= 50;
-            //gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
         }
         if (other.name.Contains("Fork"))
         {
             score -= 50;
-            //gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
         }
         if (other.name.Contains("Plate"))
         {
             score -= 50;
-            //gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
         }
         #endregion
@@ -94,6 +107,7 @@ public class CheeseCollect : MonoBehaviour
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
         }
+
         #endregion
 
         #region Ranks
@@ -119,7 +133,29 @@ public class CheeseCollect : MonoBehaviour
             rankA.SetActive(false);
             rankS.SetActive(true);
         }
-        myScore.text = score.ToString();
+        Score();
     }
     #endregion
+
+    public void Score()
+    {
+        myScore.text = score.ToString();
+        if(score > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScore.text = score.ToString();
+        }
+        
+    }
+
+    public void Reset()
+    {
+       
+        PlayerPrefs.DeleteAll();
+        highScore.text = "0";
+ 
+        
+    }
+
+
 }
