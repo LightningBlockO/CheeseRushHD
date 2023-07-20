@@ -204,7 +204,7 @@ public class Player_Movement : MonoBehaviour
         #region Animations
         bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         bool isRunningInput = Input.GetKey(KeyCode.LeftShift);
-        bool isPunchInput = Input.GetMouseButtonDown(0);
+        bool isPunchInput = Input.GetKey(KeyCode.Mouse0);
 
         if (isRunningInput)
         {
@@ -261,7 +261,7 @@ public class Player_Movement : MonoBehaviour
         // Boost       
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) /*&& Input.GetKey(KeyCode.W)*/)
+        if (Input.GetKeyUp(KeyCode.LeftShift) /*&& Input.GetKey(KeyCode.W)*/)
         {
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostDelay && !isBoosting)
@@ -270,9 +270,6 @@ public class Player_Movement : MonoBehaviour
                 SetPlayerSpeed(boostedSpeed);
                 TransitionFOV(normalFOV, normalFOV);
                 Debug.Log("Moch1");
-
-                
-
             }
 
             else
