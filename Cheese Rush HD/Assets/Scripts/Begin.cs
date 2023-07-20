@@ -13,7 +13,7 @@ public class Begin : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SceneManager.LoadScene("Test_Kitchen");
+            SceneManager.LoadScene("Stage 1 - Kitchen");
         }
     }
 }
