@@ -288,7 +288,7 @@ public class Player_Movement : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             maxBoostTimer += Time.deltaTime;
             if (maxBoostTimer >= maxBoostDelay && !isMaxBoosting)
@@ -327,7 +327,7 @@ public class Player_Movement : MonoBehaviour
 
     private void ResetShiftHoldTime()
     {
-        shiftHoldTime = 0f;
+        shiftHoldTime = 0.1f;
     }
 
     private void ResetPunch()
