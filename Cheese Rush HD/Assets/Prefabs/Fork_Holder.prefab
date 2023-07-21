@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2605450541819962040}
   - component: {fileID: 2605450541819962043}
   - component: {fileID: 2605450541819962041}
+  - component: {fileID: 241786240519119462}
   m_Layer: 0
   m_Name: Fork
   m_TagString: Untagged
@@ -106,6 +107,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &241786240519119462
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2605450541819962042}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.110000074, y: 0.54000026, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3834190802971883021
 GameObject:
   m_ObjectHideFlags: 0
