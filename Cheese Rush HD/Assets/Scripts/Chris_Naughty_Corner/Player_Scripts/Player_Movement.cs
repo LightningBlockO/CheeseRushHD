@@ -344,7 +344,11 @@ public class Player_Movement : MonoBehaviour
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 backwardForce = -other.transform.forward * launchForce;
+                Vector3 launchDirection = transform.position - other.transform.position;
+                launchDirection.y = 0f;
+                launchDirection.Normalize();
+
+                Vector3 backwardForce = launchDirection * launchForce;
                 rb.AddForce(backwardForce, ForceMode.Impulse);
             }
         }

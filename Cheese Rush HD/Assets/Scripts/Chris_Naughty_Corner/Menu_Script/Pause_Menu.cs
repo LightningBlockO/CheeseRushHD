@@ -11,15 +11,15 @@ public class Pause_Menu : MonoBehaviour
     void Start()
     {
         rat.GetComponent<Player_Movement>();
-        UnlockMouse();
+        //UnlockMouse();
         pauseMenu.SetActive(false);
 
     }
-    void UnlockMouse()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+    //void UnlockMouse()
+    //{
+    //    Cursor.lockState = CursorLockMode.None;
+    //    Cursor.visible = true;
+    //}
 
     // Update is called once per frame
     void Update()
