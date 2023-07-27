@@ -472,7 +472,7 @@ public class Player_Movement : MonoBehaviour
     {
         Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 2.3f;
+        float distance = 2.8f;
         //Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
         if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
