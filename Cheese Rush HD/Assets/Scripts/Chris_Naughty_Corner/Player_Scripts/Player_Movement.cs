@@ -202,16 +202,16 @@ public class Player_Movement : MonoBehaviour
 
         #endregion
         #region Animations
-        bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-        bool isRunningInput = Input.GetKey(KeyCode.LeftShift);
+        //bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        bool isRunningInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         bool isPunchInput = Input.GetMouseButton(0);
 
         if (isRunningInput)
         {
-            isShiftHeld = true;
-            shiftHoldTime += Time.deltaTime;
+            //isShiftHeld = true;
+            //shiftHoldTime += Time.deltaTime;
 
-            if (shiftHoldTime >= MachAnimationThreshold)
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 isMach = true;
                 isWalking = false;
@@ -224,14 +224,14 @@ public class Player_Movement : MonoBehaviour
                 isRunning = true;
             }
         }
-        else if (isWalkingInput)
-        {
-            ResetShiftHoldTime();
-            isShiftHeld = false;
-            isWalking = true;
-            isRunning = false;
-            isMach = false;
-        }
+        //else if (isWalkingInput)
+        //{
+        //    ResetShiftHoldTime();
+        //    isShiftHeld = false;
+        //    isWalking = true;
+        //    isRunning = false;
+        //    isMach = false;
+        //}
         else
         {
             ResetShiftHoldTime();
@@ -285,7 +285,7 @@ public class Player_Movement : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)*/)
         {
             maxBoostTimer += Time.deltaTime;
             if (maxBoostTimer >= maxBoostDelay && !isMaxBoosting)
@@ -472,7 +472,7 @@ public class Player_Movement : MonoBehaviour
     {
         Vector3 origin = transform.position /*new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z)*/;
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 2.3f;
+        float distance = 2.8f;
         //Debug.Log(Physics.Raycast(origin, direction, out RaycastHit hit, distance));
         if (Physics.Raycast(origin, direction, out RaycastHit tih, distance, groundLayerMask))
         {
