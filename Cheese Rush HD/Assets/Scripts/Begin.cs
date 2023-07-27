@@ -12,9 +12,9 @@ public class Begin : MonoBehaviour
             
             SceneManager.LoadScene("Stage 1 - Kitchen");
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SceneManager.LoadScene("CRHD Prototype");
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    SceneManager.LoadScene("CRHD Prototype");
+        //}
     }
 }
