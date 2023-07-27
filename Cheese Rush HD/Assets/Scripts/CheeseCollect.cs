@@ -52,16 +52,13 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Knife"))
         {
             score -= 50;
-            Destroy(other.gameObject);
         }
         if (other.name.Contains("Fork"))
         {
             score -= 50;
-            Destroy(other.gameObject);
         }
         if (other.name.Contains("Plate"))
         {
-            score -= 50;
             Destroy(other.gameObject);
         }
         #endregion

@@ -13643,7 +13643,7 @@ GameObject:
   - component: {fileID: 529144649}
   m_Layer: 3
   m_Name: Fire_Holder
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26511,9 +26511,10 @@ GameObject:
   - component: {fileID: 999447826}
   - component: {fileID: 999447828}
   - component: {fileID: 999447827}
+  - component: {fileID: 999447829}
   m_Layer: 3
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26606,6 +26607,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &999447829
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999447825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2130718, y: 4.04, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &999620959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46585,6 +46599,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
+  launchForce: 5
   jumpForce: 12
   fallMultiplier: 6
   lowJumpMultiplier: 10
@@ -64008,9 +64023,10 @@ GameObject:
   - component: {fileID: 2109250795}
   - component: {fileID: 2109250797}
   - component: {fileID: 2109250798}
+  - component: {fileID: 2109250799}
   m_Layer: 3
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64103,6 +64119,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &2109250799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109250794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2130709, y: 4.04, z: 0.19999999}
+  m_Center: {x: 0, y: 0, z: -0.0000009536743}
 --- !u!4 &2110469653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8959650813493885451, guid: 45ae3c0da9f6cfc408a45221c440b4ad, type: 3}

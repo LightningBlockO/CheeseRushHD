@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 241786240519119462}
   m_Layer: 0
   m_Name: Fork
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 3076778709824192263}
   m_Layer: 0
   m_Name: Fork_Holder
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

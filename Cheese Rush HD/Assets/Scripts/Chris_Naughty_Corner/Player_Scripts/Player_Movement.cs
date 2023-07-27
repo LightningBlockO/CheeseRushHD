@@ -25,6 +25,7 @@ public class Player_Movement : MonoBehaviour
     public float dashDuration = 0.1f;
     public float dashCooldown = 2.0f;
     public LayerMask obstacleLayer;
+    public float launchForce = 50f;
     public bool IsDashing { get; private set; }
     #endregion
     #region Jump
@@ -108,7 +109,6 @@ public class Player_Movement : MonoBehaviour
     {
         ApplyFallMultiplier();
     }
-
     void Update()
     {
         #region Movement
@@ -333,11 +333,22 @@ public class Player_Movement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && (isDashing || isMaxBoosting))
+        if (other.CompareTag("Circle") && (isDashing || isMaxBoosting))
         {
             Debug.Log("Killed Enemy");
             Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("Enemy"))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 backwardForce = -other.transform.forward * launchForce;
+                rb.AddForce(backwardForce, ForceMode.Impulse);
+            }
+        }
+        
     }
 
     
@@ -347,6 +358,7 @@ public class Player_Movement : MonoBehaviour
         rb.MovePosition(desiredPosition);
     }
 
+    
     private void Jump()
     {
         if (isGrounded)
