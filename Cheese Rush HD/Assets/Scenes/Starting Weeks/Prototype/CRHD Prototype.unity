@@ -14498,12 +14498,24 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: normalSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: boostedSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
       propertyPath: maxBoostDelay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
       propertyPath: fallMultiplier
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 309588390580690947, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
+      propertyPath: maxBoostedSpeed
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 309588390580690949, guid: fc6b97f44008ea541b3d16a3677306d9, type: 3}
       propertyPath: m_RootOrder
