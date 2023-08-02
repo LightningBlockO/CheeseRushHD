@@ -14,8 +14,10 @@ public class CheeseCollect : MonoBehaviour
     public GameObject finishline;
     public GameObject transparentcheese;
     public GameObject rushcheese;
-    public GameObject lap2;
-    public GameObject transparentlap2;
+    //public GameObject lap2;
+    //public GameObject transparentlap2;
+    public GameObject transparentcheesewalls;
+    public GameObject transparentcheesewallscheeserush;
     public GameObject cheeserushmusic;
     public GameObject levelmusic;
     public GameObject rankD;
@@ -23,9 +25,9 @@ public class CheeseCollect : MonoBehaviour
     public GameObject rankB;
     public GameObject rankA;
     public GameObject rankS;
-    public GameObject ranklap1;
-    public GameObject ranklap2;
-    public GameObject ranklap3;
+    //public GameObject ranklap1;
+    //public GameObject ranklap2;
+    //public GameObject ranklap3;
 
     [SerializeField]
     public int score {get; private set;}
@@ -86,23 +88,25 @@ public class CheeseCollect : MonoBehaviour
         {
             score += 1000;
             gameObject.GetComponent<AudioSource>().Play();
-            ranklap1.SetActive(false);
-            ranklap2.SetActive(true);
+            //ranklap1.SetActive(false);
+            //ranklap2.SetActive(true);
         }
         if (other.name.Contains("Final"))
         {
             score += 990;
             gameObject.GetComponent<AudioSource>().Play();
-            Destroy(other.gameObject);
+            cheeserushmusic.SetActive(true);
+            levelmusic.SetActive(false);
             timer.SetActive(true);
             cheeserush.SetActive(true);
             finishline.SetActive(true);
+            transparentcheesewalls.SetActive(true);
+            transparentcheesewallscheeserush.SetActive(false);
             transparentcheese.SetActive(false);
             rushcheese.SetActive(true);
-            lap2.SetActive(true);
-            transparentlap2.SetActive(false);
-            cheeserushmusic.SetActive(true);
-            levelmusic.SetActive(false);
+            //lap2.SetActive(true);
+            //transparentlap2.SetActive(false);
+            Destroy(other.gameObject);
         }
 
         #endregion
