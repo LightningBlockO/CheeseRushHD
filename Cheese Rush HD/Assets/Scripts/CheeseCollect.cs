@@ -29,6 +29,9 @@ public class CheeseCollect : MonoBehaviour
     //public GameObject ranklap2;
     //public GameObject ranklap3;
 
+    public TMP_Text hitScore;
+    public Animation hitScoreAnime;
+
     [SerializeField]
     public int score {get; private set;}
 
@@ -38,6 +41,8 @@ public class CheeseCollect : MonoBehaviour
     public void Start()
     {
         highScore.text = PlayerPrefs.GetInt("HighScore",0).ToString();
+        hitScore = GameObject.Find("Hit").GetComponent<TMP_Text>();
+        hitScoreAnime = hitScore.GetComponent<Animation>();
     }
     public void Update()
     {
@@ -54,10 +59,18 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Knife"))
         {
             score -= 50;
+            Score();
+            hitScore.gameObject.SetActive(true);
+            hitScoreAnime.Stop();
+            hitScoreAnime.Play();
         }
         if (other.name.Contains("Fork"))
         {
             score -= 50;
+            Score();
+            hitScore.gameObject.SetActive(true);
+            hitScoreAnime.Stop();
+            hitScoreAnime.Play();
         }
         if (other.name.Contains("Plate"))
         {
@@ -73,6 +86,7 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Cheese"))
         {
             score += 10;
+            Score();
             gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
             Analytics.CustomEvent("CheeseCollect");
@@ -81,6 +95,7 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Large"))
         {
             score += 90;
+            Score();
             gameObject.GetComponent<AudioSource>().Play();
             Destroy(other.gameObject);
         }
@@ -90,6 +105,7 @@ public class CheeseCollect : MonoBehaviour
             gameObject.GetComponent<AudioSource>().Play();
             //ranklap1.SetActive(false);
             //ranklap2.SetActive(true);
+            Score();
         }
         if (other.name.Contains("Final"))
         {
@@ -107,6 +123,7 @@ public class CheeseCollect : MonoBehaviour
             //lap2.SetActive(true);
             //transparentlap2.SetActive(false);
             Destroy(other.gameObject);
+            Score();
         }
 
         #endregion
