@@ -31,6 +31,7 @@ public class CheeseCollect : MonoBehaviour
 
     public TMP_Text hitScore;
     public Animation hitScoreAnime;
+    private bool isHitAnimationPlaying = false;
 
     private List<GameObject> cheesePool = new List<GameObject>();
 
@@ -42,19 +43,21 @@ public class CheeseCollect : MonoBehaviour
     public AudioClip lapCompleteClip;
     public AudioClip finalLapCompleteClip;
 
+    public PlayerRespawnManager prm;
 
 
 
     public void Start()
     {
+        prm = FindObjectOfType<PlayerRespawnManager>();
+        Debug.Log("PlayerRespawnManager found: " + (prm != null));
         highScore.text = PlayerPrefs.GetInt("HighScore",0).ToString();
-        hitScore = GameObject.Find("Hit").GetComponent<TMP_Text>();
-        hitScoreAnime = hitScore.GetComponent<Animation>();
-        foreach (GameObject cheese in GameObject.FindGameObjectsWithTag("Cheese"))
-        {
-            cheesePool.Add(cheese);
-            cheese.SetActive(false);
-        }
+        //hitScore = GameObject.Find("Hit").GetComponent<TMP_Text>();
+        //foreach (GameObject cheese in GameObject.FindGameObjectsWithTag("Cheese"))
+        //{
+        //    cheesePool.Add(cheese);
+        //    cheese.SetActive(false);
+        //}
     }
     public void Update()
     {
@@ -68,26 +71,18 @@ public class CheeseCollect : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         #region Enemy Reduce Points
-        if (other.name.Contains("Knife"))
+        if ((other.name.Contains("Knife") || other.name.Contains("Fork")) && !isHitAnimationPlaying)
         {
             score -= 50;
-            Score();
+
             hitScore.gameObject.SetActive(true);
             hitScoreAnime.Stop();
             hitScoreAnime.Play();
+            isHitAnimationPlaying = true;
+            Score(); 
+            StartCoroutine(ResetHitAnimation(hitScoreAnime.clip.length));
         }
-        if (other.name.Contains("Fork"))
-        {
-            score -= 50;
-            Score();
-            hitScore.gameObject.SetActive(true);
-            hitScoreAnime.Stop();
-            hitScoreAnime.Play();
-        }
-        if (other.name.Contains("Plate"))
-        {
-            Destroy(other.gameObject);
-        }
+
         #endregion
 
 
@@ -130,10 +125,12 @@ public class CheeseCollect : MonoBehaviour
             timer.SetActive(true);
             cheeserush.SetActive(true);
             finishline.SetActive(true);
-            transparentcheesewalls.SetActive(true);
-            transparentcheesewallscheeserush.SetActive(false);
-            transparentcheese.SetActive(false);
-            rushcheese.SetActive(true);
+            //transparentcheesewalls.SetActive(true);
+            //transparentcheesewallscheeserush.SetActive(false);
+            //transparentcheese.SetActive(false);
+            //rushcheese.SetActive(true);
+            prm.EnableNewRespawnPoints();
+            Debug.Log("EnableNewRespawnPoints() method called from CheeseCollect script.");
             //lap2.SetActive(true);
             //transparentlap2.SetActive(false);
             Destroy(other.gameObject);
@@ -184,9 +181,18 @@ public class CheeseCollect : MonoBehaviour
        
         PlayerPrefs.DeleteAll();
         highScore.text = "0";
- 
-        
     }
 
+    private IEnumerator ResetHitAnimation(float animationDuration)
+    {
 
+        yield return new WaitForSeconds(2f);
+        hitScore.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(1f);
+        hitScoreAnime.Stop();
+        //hitScore.gameObject.SetActive(true);
+        isHitAnimationPlaying = false;
+
+    }
 }

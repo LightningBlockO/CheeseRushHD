@@ -164,7 +164,7 @@ public class Player_Movement : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
         #endregion
         #region Jump
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && !isDashing && isGrounded)
