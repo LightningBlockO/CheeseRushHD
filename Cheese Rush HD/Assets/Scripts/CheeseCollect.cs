@@ -92,30 +92,30 @@ public class CheeseCollect : MonoBehaviour
 
         if (other.name.Contains("Cheese"))
         {
-            AudioSource playerAudioSource = gameObject.GetComponent<AudioSource>();
-            if (playerAudioSource != null)
+            CheeseAudio cheeseAudioPlayer = other.GetComponent<CheeseAudio>();
+            if (cheeseAudioPlayer != null)
             {
-                playerAudioSource.Play();
+                cheeseAudioPlayer.PlayAudio();
             }
             score += 10;
             Score();
-            other.gameObject.SetActive(false);
-            cheesePool.Add(other.gameObject);
+            //other.gameObject.SetActive(false);
             //Destroy(other.gameObject);
             Analytics.CustomEvent("CheeseCollect");
             Debug.Log("Cheese Hopefully Tracked");
+            
         }
         if (other.name.Contains("Large"))
         {
-            AudioSource playerAudioSource = gameObject.GetComponent<AudioSource>();
-            if (playerAudioSource != null)
+            CheeseAudio cheeseAudioPlayer = other.GetComponent<CheeseAudio>();
+            if (cheeseAudioPlayer != null)
             {
-                playerAudioSource.Play();
+                cheeseAudioPlayer.PlayAudio();
             }
             score += 90;
             Score();
-            other.gameObject.SetActive(false);
-            cheesePool.Add(other.gameObject);
+            //other.gameObject.SetActive(false);
+            //cheesePool.Add(other.gameObject);
             //Destroy(other.gameObject);
         }
         if (other.name.Contains("Lap"))
