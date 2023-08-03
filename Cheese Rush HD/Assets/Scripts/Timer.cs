@@ -7,9 +7,9 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject cheeseFace;
-    public float timeRemaining = 230;
+    //public GameObject player;
+    //public GameObject cheeseFace;
+    public float timeRemaining = 170;
     private bool timerRunning = true;
     public TextMeshProUGUI timeText;
 
@@ -37,10 +37,10 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = 0;
                 timerRunning = false;
-                cheeseFace.SetActive(true);
-                Instantiate(cheeseFace, player.transform.position, Quaternion.identity);
-                cheeseFace.transform.parent = player.transform;
-                //SceneManager.LoadScene("Lose Scene");
+                //cheeseFace.SetActive(true);
+                //Instantiate(cheeseFace, player.transform.position, Quaternion.identity);
+                //cheeseFace.transform.parent = player.transform;
+                SceneManager.LoadScene("Lose Scene");
             }
         }
     }

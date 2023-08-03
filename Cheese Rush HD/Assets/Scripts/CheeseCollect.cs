@@ -40,8 +40,8 @@ public class CheeseCollect : MonoBehaviour
 
     public AudioClip cheeseCollectClip;
     public AudioClip largeCheeseCollectClip;
-    public AudioClip lapCompleteClip;
-    public AudioClip finalLapCompleteClip;
+    //public AudioClip lapCompleteClip;
+    //public AudioClip finalLapCompleteClip;
 
     public PlayerRespawnManager prm;
 
@@ -125,10 +125,10 @@ public class CheeseCollect : MonoBehaviour
             timer.SetActive(true);
             cheeserush.SetActive(true);
             finishline.SetActive(true);
-            //transparentcheesewalls.SetActive(true);
-            //transparentcheesewallscheeserush.SetActive(false);
-            //transparentcheese.SetActive(false);
-            //rushcheese.SetActive(true);
+            transparentcheesewalls.SetActive(true);
+            transparentcheesewallscheeserush.SetActive(false);
+            transparentcheese.SetActive(false);
+            rushcheese.SetActive(true);
             prm.EnableNewRespawnPoints();
             Debug.Log("EnableNewRespawnPoints() method called from CheeseCollect script.");
             //lap2.SetActive(true);
@@ -140,23 +140,30 @@ public class CheeseCollect : MonoBehaviour
 
         #region Ranks
         //Ranks
-
-        if (score >= 2500 && score < 4000)
+        if (score < 1500)
+        {
+            rankD.SetActive(true);
+            rankC.SetActive(false);
+        }
+        if (score >= 1500 && score < 3500)
         {
             rankD.SetActive(false);
             rankC.SetActive(true);
+            rankB.SetActive(false);
         }
-        if (score >= 4000 && score <6000)
+        if (score >= 3500 && score <7000)
         {
             rankC.SetActive(false);
             rankB.SetActive(true);
+            rankA.SetActive(false);
         }
-        if (score >= 6000 && score <7500)
+        if (score >= 7000 && score <10000)
         {
             rankB.SetActive(false);
             rankA.SetActive(true);
+            rankS.SetActive(false);
         }
-        if (score >= 7500)
+        if (score >= 10000)
         {
             rankA.SetActive(false);
             rankS.SetActive(true);

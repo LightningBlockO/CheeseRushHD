@@ -15,19 +15,19 @@ public class Finish : MonoBehaviour
                 {
                     SceneManager.LoadScene("Rank D");
                 }
-                else if (cheesecollect.score >= 1500 && cheesecollect.score < 3000)
+                else if (cheesecollect.score >= 1500 && cheesecollect.score < 3500)
                 {
                     SceneManager.LoadScene("Rank C");
                 }
-                else if (cheesecollect.score >= 3000 && cheesecollect.score < 5000)
+                else if (cheesecollect.score >= 3500 && cheesecollect.score < 7000)
                 {
                     SceneManager.LoadScene("Rank B");
                 }
-                else if (cheesecollect.score >= 5000 && cheesecollect.score < 7000)
+                else if (cheesecollect.score >= 7000 && cheesecollect.score < 10000)
                 {
                     SceneManager.LoadScene("Rank A");
                 }
-                else if (cheesecollect.score >= 7000)
+                else if (cheesecollect.score >= 10000)
                 {
                     SceneManager.LoadScene("Rank S");
                 }

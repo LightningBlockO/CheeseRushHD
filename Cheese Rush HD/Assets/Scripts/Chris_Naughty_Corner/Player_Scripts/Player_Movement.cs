@@ -290,6 +290,7 @@ public class Player_Movement : MonoBehaviour
             maxBoostTimer += Time.deltaTime;
             if (maxBoostTimer >= maxBoostDelay && !isMaxBoosting)
             {
+                UiManager.Instance.ChangePlayerState(UiManager.PlayerState.remymach);
                 isMaxBoosting = true;
                 SetPlayerSpeed(maxBoostedSpeed);
                 TransitionFOV(normalFOV, boostedFOV);
@@ -298,6 +299,7 @@ public class Player_Movement : MonoBehaviour
         }
         else
         {
+            UiManager.Instance.ChangePlayerState(UiManager.PlayerState.remyidle);
             // Reset Boost
             maxBoostTimer = 0.0f;
 
