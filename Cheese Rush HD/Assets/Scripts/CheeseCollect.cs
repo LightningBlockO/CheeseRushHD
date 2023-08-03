@@ -32,6 +32,8 @@ public class CheeseCollect : MonoBehaviour
     public TMP_Text hitScore;
     public Animation hitScoreAnime;
 
+    private List<GameObject> cheesePool = new List<GameObject>();
+
     [SerializeField]
     public int score {get; private set;}
 
@@ -43,6 +45,11 @@ public class CheeseCollect : MonoBehaviour
         highScore.text = PlayerPrefs.GetInt("HighScore",0).ToString();
         hitScore = GameObject.Find("Hit").GetComponent<TMP_Text>();
         hitScoreAnime = hitScore.GetComponent<Animation>();
+        foreach (GameObject cheese in GameObject.FindGameObjectsWithTag("Cheese"))
+        {
+            cheesePool.Add(cheese);
+            cheese.SetActive(false);
+        }
     }
     public void Update()
     {
@@ -85,19 +92,31 @@ public class CheeseCollect : MonoBehaviour
 
         if (other.name.Contains("Cheese"))
         {
+            AudioSource playerAudioSource = gameObject.GetComponent<AudioSource>();
+            if (playerAudioSource != null)
+            {
+                playerAudioSource.Play();
+            }
             score += 10;
             Score();
-            gameObject.GetComponent<AudioSource>().Play();
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+            cheesePool.Add(other.gameObject);
+            //Destroy(other.gameObject);
             Analytics.CustomEvent("CheeseCollect");
             Debug.Log("Cheese Hopefully Tracked");
         }
         if (other.name.Contains("Large"))
         {
+            AudioSource playerAudioSource = gameObject.GetComponent<AudioSource>();
+            if (playerAudioSource != null)
+            {
+                playerAudioSource.Play();
+            }
             score += 90;
             Score();
-            gameObject.GetComponent<AudioSource>().Play();
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+            cheesePool.Add(other.gameObject);
+            //Destroy(other.gameObject);
         }
         if (other.name.Contains("Lap"))
         {
@@ -131,22 +150,22 @@ public class CheeseCollect : MonoBehaviour
         #region Ranks
         //Ranks
 
-        if (score >= 1500 && score < 3000)
+        if (score >= 2500 && score < 4000)
         {
             rankD.SetActive(false);
             rankC.SetActive(true);
         }
-        if (score >= 3000 && score <5000)
+        if (score >= 4000 && score <6000)
         {
             rankC.SetActive(false);
             rankB.SetActive(true);
         }
-        if (score >= 5000 && score <7000)
+        if (score >= 6000 && score <7500)
         {
             rankB.SetActive(false);
             rankA.SetActive(true);
         }
-        if (score >= 7000)
+        if (score >= 7500)
         {
             rankA.SetActive(false);
             rankS.SetActive(true);
