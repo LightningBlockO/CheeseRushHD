@@ -115,7 +115,7 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Lap"))
         {
             score += 1000;
-            gameObject.GetComponent<AudioSource>().Play();
+            //gameObject.GetComponent<AudioSource>().Play();
             //ranklap1.SetActive(false);
             //ranklap2.SetActive(true);
             Score();
@@ -123,7 +123,8 @@ public class CheeseCollect : MonoBehaviour
         if (other.name.Contains("Final"))
         {
             score += 990;
-            gameObject.GetComponent<AudioSource>().Play();
+            Score();
+            //gameObject.GetComponent<AudioSource>().Play();
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
             timer.SetActive(true);
@@ -136,7 +137,6 @@ public class CheeseCollect : MonoBehaviour
             //lap2.SetActive(true);
             //transparentlap2.SetActive(false);
             Destroy(other.gameObject);
-            Score();
         }
 
         #endregion
