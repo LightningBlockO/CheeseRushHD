@@ -37,11 +37,6 @@ public class CheeseCollect : MonoBehaviour
     [SerializeField]
     public int score {get; private set;}
 
-    public AudioClip cheeseCollectClip;
-    public AudioClip largeCheeseCollectClip;
-    public AudioClip lapCompleteClip;
-    public AudioClip finalLapCompleteClip;
-
 
 
 
@@ -97,20 +92,31 @@ public class CheeseCollect : MonoBehaviour
 
         if (other.name.Contains("Cheese"))
         {
-            SoundManager.Instance.PlaySFX(cheeseCollectClip);
+            CheeseAudio cheeseAudioPlayer = other.GetComponent<CheeseAudio>();
+            if (cheeseAudioPlayer != null)
+            {
+                cheeseAudioPlayer.PlayAudio();
+            }
             score += 10;
             Score();
-            Destroy(other.gameObject);
+            //other.gameObject.SetActive(false);
+            //Destroy(other.gameObject);
             Analytics.CustomEvent("CheeseCollect");
             Debug.Log("Cheese Hopefully Tracked");
             
         }
         if (other.name.Contains("Large"))
         {
-            SoundManager.Instance.PlaySFX(largeCheeseCollectClip);
+            CheeseAudio cheeseAudioPlayer = other.GetComponent<CheeseAudio>();
+            if (cheeseAudioPlayer != null)
+            {
+                cheeseAudioPlayer.PlayAudio();
+            }
             score += 90;
             Score();
-            Destroy(other.gameObject);
+            //other.gameObject.SetActive(false);
+            //cheesePool.Add(other.gameObject);
+            //Destroy(other.gameObject);
         }
         if (other.name.Contains("Lap"))
         {
