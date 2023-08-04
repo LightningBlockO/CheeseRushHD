@@ -18,6 +18,8 @@ public class CheeseCollect : MonoBehaviour
     //public GameObject transparentlap2;
     public GameObject transparentcheesewalls;
     public GameObject transparentcheesewallscheeserush;
+    public GameObject solidcheesewalls;
+    public GameObject solidcheesewallscheeserush;
     public GameObject cheeserushmusic;
     public GameObject levelmusic;
     public GameObject rankD;
@@ -129,6 +131,8 @@ public class CheeseCollect : MonoBehaviour
             finishline.SetActive(true);
             transparentcheesewalls.SetActive(true);
             transparentcheesewallscheeserush.SetActive(false);
+            solidcheesewalls.SetActive(false);
+            solidcheesewallscheeserush.SetActive(true);
             transparentcheese.SetActive(false);
             rushcheese.SetActive(true);
             prm.EnableNewRespawnPoints();
