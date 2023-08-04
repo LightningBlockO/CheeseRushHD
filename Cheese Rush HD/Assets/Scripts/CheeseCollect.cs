@@ -45,6 +45,7 @@ public class CheeseCollect : MonoBehaviour
 
     public PlayerRespawnManager prm;
 
+    public GameObject cheeseFace;
 
 
     public void Start()
@@ -119,6 +120,7 @@ public class CheeseCollect : MonoBehaviour
         {
             score += 990;
             Score();
+            cheeseFace.SetActive(true);
             //gameObject.GetComponent<AudioSource>().Play();
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
