@@ -7,11 +7,18 @@ using TMPro;
 
 public class CheeseCollect : MonoBehaviour
 {
+    [Header("UI")]
     public TextMeshProUGUI myScore;
     public TextMeshProUGUI highScore;
     public GameObject timer;
     public GameObject cheeserush;
     public GameObject finishline;
+    public TMP_Text hitScore;
+    public Animation hitScoreAnime;
+    private bool isHitAnimationPlaying = false;
+    [SerializeField]
+    public int score { get; private set; }
+    [Header("Cheese")]
     public GameObject transparentcheese;
     public GameObject rushcheese;
     //public GameObject lap2;
@@ -20,8 +27,13 @@ public class CheeseCollect : MonoBehaviour
     public GameObject transparentcheesewallscheeserush;
     public GameObject solidcheesewalls;
     public GameObject solidcheesewallscheeserush;
+    private List<GameObject> cheesePool = new List<GameObject>();
+
+    [Header("Music + Ranks")]
     public GameObject cheeserushmusic;
     public GameObject levelmusic;
+    public AudioClip cheeseCollectClip;
+    public AudioClip largeCheeseCollectClip;
     public GameObject rankD;
     public GameObject rankC;
     public GameObject rankB;
@@ -31,23 +43,22 @@ public class CheeseCollect : MonoBehaviour
     //public GameObject ranklap2;
     //public GameObject ranklap3;
 
-    public TMP_Text hitScore;
-    public Animation hitScoreAnime;
-    private bool isHitAnimationPlaying = false;
+    [Header("CheeseFace")]
+    public GameObject cheeseFace;
+    public GameObject cheeseFaceStart;
+    public GameObject startTimer;
 
-    private List<GameObject> cheesePool = new List<GameObject>();
+    [Header("PlayerSTuff")]
+    public PlayerRespawnManager prm;
 
-    [SerializeField]
-    public int score {get; private set;}
 
-    public AudioClip cheeseCollectClip;
-    public AudioClip largeCheeseCollectClip;
+
     //public AudioClip lapCompleteClip;
     //public AudioClip finalLapCompleteClip;
 
-    public PlayerRespawnManager prm;
 
-    public GameObject cheeseFace;
+
+
 
 
     public void Start()
@@ -123,6 +134,8 @@ public class CheeseCollect : MonoBehaviour
             score += 990;
             Score();
             cheeseFace.SetActive(true);
+            cheeseFaceStart.SetActive(false);
+            startTimer.SetActive(false);
             //gameObject.GetComponent<AudioSource>().Play();
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);

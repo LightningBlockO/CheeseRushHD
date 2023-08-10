@@ -8,11 +8,18 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     //public GameObject player;
-    //public GameObject cheeseFace;
+    public GameObject cheeseFaceFollow;
+    public GameObject LockedCheeseFace;
     public float timeRemaining = 170;
     private bool timerRunning = true;
     public TextMeshProUGUI timeText;
+    public MeshRenderer cheeseFaceEarly;
+    public Collider cheeseFaceEarlyCollider;
 
+    void Awake()
+    {
+        StartCoroutine(AfterTime());
+    }
     void Update()
     {
         DoTimer();
@@ -37,11 +44,20 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = 0;
                 timerRunning = false;
-                //cheeseFace.SetActive(true);
+                cheeseFaceFollow.SetActive(true);
+                LockedCheeseFace.SetActive(false);
                 //Instantiate(cheeseFace, player.transform.position, Quaternion.identity);
                 //cheeseFace.transform.parent = player.transform;
-                SceneManager.LoadScene("Lose Scene");
+                //SceneManager.LoadScene("Lose Scene");
+                cheeseFaceEarly.enabled = true;
+
             }
         }
+    }
+    IEnumerator AfterTime()
+    {
+        yield return new WaitForSeconds(10f);
+        cheeseFaceEarly.GetComponent<MeshRenderer>().enabled = true;
+        cheeseFaceEarlyCollider.GetComponent<Collider>().enabled = true;
     }
 }
