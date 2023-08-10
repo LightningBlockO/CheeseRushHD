@@ -28,15 +28,18 @@ public class Pause_Menu : MonoBehaviour
         {
             rat.GetComponent<Player_Movement>().enabled = false;
             pauseMenu.SetActive(true);
+            Time.timeScale = 0;
         }
         if (Input.GetKey(KeyCode.R))
         {
             pauseMenu.SetActive(false);
             rat.GetComponent<Player_Movement>().enabled = true;
+            Time.timeScale = 1;
         }
         if (Input.GetKey(KeyCode.M))
         {
             SceneManager.LoadScene("Menu Scene");
+            Time.timeScale = 1;
         }
         if (Input.GetKey(KeyCode.L))
         {

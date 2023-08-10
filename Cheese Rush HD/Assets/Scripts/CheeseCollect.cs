@@ -10,7 +10,7 @@ public class CheeseCollect : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI myScore;
     public TextMeshProUGUI highScore;
-    public GameObject timer;
+    //public GameObject timer;
     public GameObject cheeserush;
     public GameObject finishline;
     public TMP_Text hitScore;
@@ -85,7 +85,7 @@ public class CheeseCollect : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         #region Enemy Reduce Points
-        if ((other.name.Contains("Knife") || other.name.Contains("Fork")) && !isHitAnimationPlaying)
+        if ((other.name.Contains("Knife") || other.name.Contains("Fork") || other.name.Contains("Fire") && !isHitAnimationPlaying))
         {
             score -= 50;
 
@@ -139,7 +139,7 @@ public class CheeseCollect : MonoBehaviour
             //gameObject.GetComponent<AudioSource>().Play();
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
-            timer.SetActive(true);
+            //timer.SetActive(true);
             cheeserush.SetActive(true);
             finishline.SetActive(true);
             transparentcheesewalls.SetActive(true);

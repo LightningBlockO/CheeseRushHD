@@ -56,7 +56,7 @@ public class Timer : MonoBehaviour
     }
     IEnumerator AfterTime()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(140f);
         cheeseFaceEarly.GetComponent<MeshRenderer>().enabled = true;
         cheeseFaceEarlyCollider.GetComponent<Collider>().enabled = true;
     }

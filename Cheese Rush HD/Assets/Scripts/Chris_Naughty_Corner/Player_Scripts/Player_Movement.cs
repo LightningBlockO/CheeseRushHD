@@ -354,7 +354,19 @@ public class Player_Movement : MonoBehaviour
                 rb.AddForce(backwardForce, ForceMode.Impulse);
             }
         }
-        
+        if (other.CompareTag("Fire"))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 launchDirection = transform.position - other.transform.position;
+                launchDirection.y = 5f;
+                launchDirection.Normalize();
+
+                Vector3 backwardForce = launchDirection * launchForce;
+                rb.AddForce(backwardForce, ForceMode.Impulse);
+            }
+        }
     }
 
     
