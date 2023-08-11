@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CheeseCollect : MonoBehaviour
 {
@@ -153,6 +154,10 @@ public class CheeseCollect : MonoBehaviour
             //lap2.SetActive(true);
             //transparentlap2.SetActive(false);
             Destroy(other.gameObject);
+        }
+        if (other.name.Contains("CF"))
+        {
+            SceneManager.LoadScene("Lose Scene");
         }
 
         #endregion
