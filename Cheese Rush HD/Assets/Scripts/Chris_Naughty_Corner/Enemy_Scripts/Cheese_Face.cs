@@ -8,15 +8,31 @@ public class Cheese_Face : MonoBehaviour
     public Transform target;
     public float speed = 4f;
     Rigidbody rig;
+    public GameObject cheeseFace;
 
-    //start is called before the first frame update 
+    private bool isFrozen = true; 
+
     void Start()
     {
         rig = GetComponent<Rigidbody>();
+        Invoke("Unfreeze", 3.5f); 
     }
 
-    //Update is called once per frame 
+    // Update is called once per frame 
     void Update()
+    {
+        if (!isFrozen)
+        {
+            FollowTarget();
+        }
+    }
+
+    public void Unfreeze()
+    {
+        isFrozen = false; 
+    }
+
+    public void FollowTarget()
     {
         Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
         rig.MovePosition(pos);
