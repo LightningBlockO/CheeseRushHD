@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 6144872489790408866}
   - component: {fileID: 995929333113730748}
   - component: {fileID: 195918310438060449}
+  - component: {fileID: -8205022344804724391}
   m_Layer: 3
   m_Name: Breadbox
   m_TagString: Untagged
@@ -298,6 +299,24 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-8205022344804724391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5876780712180262516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6450707058010488919
 GameObject:
   m_ObjectHideFlags: 0
