@@ -15,7 +15,7 @@ public class Cheese_Face : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody>();
-        Invoke("Unfreeze", 3.5f); 
+        Invoke("Unfreeze", 6f); 
     }
 
     // Update is called once per frame 
