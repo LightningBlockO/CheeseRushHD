@@ -4683,7 +4683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &168178373
 Transform:
   m_ObjectHideFlags: 0
@@ -6610,7 +6610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &262478693
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10695,7 +10695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c706af43d307a4a429864409b395963a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 218139316d6e6f34b8f0b809b12423e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15007,7 +15007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f695223dfd51d354ba1e885d9c0426fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeb536648214d8a488ac40e7111789ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24622,6 +24622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8801775311874711173, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_LocalScale.x
       value: 80
@@ -24925,6 +24929,10 @@ PrefabInstance:
     - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_Name
       value: Checkpoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8801775311874711173, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_LocalScale.x
@@ -31104,7 +31112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97fb7ae51b6c4e64896d7b32f475a65a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50b80e3735693034386ac5a499dcbb07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35736,6 +35744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8801775311874711173, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_LocalScale.x
       value: 96
@@ -37451,6 +37463,10 @@ PrefabInstance:
     - target: {fileID: 4735445887623982534, guid: 8fa5ecb56f853d345b29c23116c1bd15, type: 3}
       propertyPath: m_Name
       value: Final Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735445887623982534, guid: 8fa5ecb56f853d345b29c23116c1bd15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7137182322577241367, guid: 8fa5ecb56f853d345b29c23116c1bd15, type: 3}
       propertyPath: m_RootOrder
@@ -39203,7 +39219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1797243945
 Transform:
   m_ObjectHideFlags: 0
@@ -46271,7 +46287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2113501265
 Transform:
   m_ObjectHideFlags: 0
@@ -46954,6 +46970,10 @@ PrefabInstance:
     - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350025348967891451, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8801775311874711173, guid: c526056a169b8bd4e9f1ac8acbd93b53, type: 3}
       propertyPath: m_LocalScale.x
