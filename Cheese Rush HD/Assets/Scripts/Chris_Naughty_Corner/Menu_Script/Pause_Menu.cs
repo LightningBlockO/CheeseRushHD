@@ -13,6 +13,8 @@ public class Pause_Menu : MonoBehaviour
         rat.GetComponent<Player_Movement>();
         //UnlockMouse();
         pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
     //void UnlockMouse()
@@ -29,12 +31,16 @@ public class Pause_Menu : MonoBehaviour
             rat.GetComponent<Player_Movement>().enabled = false;
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         if (Input.GetKey(KeyCode.R))
         {
             pauseMenu.SetActive(false);
             rat.GetComponent<Player_Movement>().enabled = true;
             Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         if (Input.GetKey(KeyCode.M))
         {
@@ -50,6 +56,8 @@ public class Pause_Menu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     public void MainMenu()

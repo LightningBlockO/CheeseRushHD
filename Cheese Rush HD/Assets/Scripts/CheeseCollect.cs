@@ -198,13 +198,22 @@ public class CheeseCollect : MonoBehaviour
 
     public void Score()
     {
+        //myScore.text = score.ToString();
+        //if(score > PlayerPrefs.GetInt("HighScore", 0))
+        //{
+        //    PlayerPrefs.SetInt("HighScore", score);
+        //    highScore.text = score.ToString();
+        //}
         myScore.text = score.ToString();
-        if(score > PlayerPrefs.GetInt("HighScore", 0))
+
+        // Save the score
+        PlayerPrefs.SetInt("CurrentScore", score);
+
+        if (score > PlayerPrefs.GetInt("HighScore", 0))
         {
             PlayerPrefs.SetInt("HighScore", score);
             highScore.text = score.ToString();
         }
-        
     }
 
     public void Reset()
