@@ -247,6 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852678938}
   - component: {fileID: 852678937}
+  - component: {fileID: 852678939}
   m_Layer: 0
   m_Name: Ijobs
   m_TagString: Untagged
@@ -281,6 +282,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &852678939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852678936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a37e35629016c24b8f63314932b345b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texturePaths:
+  - Assets/Materials Assets/Materials/Level 1 Materials/Brush.mat
+  - Assets/Materials Assets/Materials/Level 1 Materials/Materials
+  - Assets/Materials Assets/Textures/Prototype Stage
 --- !u!1 &896932198
 GameObject:
   m_ObjectHideFlags: 0
