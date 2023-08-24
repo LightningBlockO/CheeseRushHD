@@ -83,6 +83,7 @@ public class Player_Movement : MonoBehaviour
     private float targetFOV;
     private float fovTransitionTimer;
 
+   
     #endregion
 
 
@@ -111,6 +112,10 @@ public class Player_Movement : MonoBehaviour
     }
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        float rightTriggerInput = Input.GetAxis("RightTrigger");
+        float leftTriggerInput = Input.GetAxis("LeftTrigger");
         #region Movement
         CheckGround();
 
@@ -130,6 +135,7 @@ public class Player_Movement : MonoBehaviour
         float smoothFactor = 0.5f;
 
         rb.velocity = Vector3.Lerp(currentVelocity, currentVelocity + velocityChange, smoothFactor);
+
 
 
 
@@ -167,7 +173,7 @@ public class Player_Movement : MonoBehaviour
         //Debug.Log(isGrounded);
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && !isDashing && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0) && !isDashing && isGrounded)
         {
             Jump();
 
@@ -191,7 +197,7 @@ public class Player_Movement : MonoBehaviour
         }
 
         // Dash
-        if (Input.GetMouseButtonDown(0) && canDash)
+        if (Input.GetMouseButtonDown(0) || rightTriggerInput > 0f && canDash)
         {
             Vector3 dashDirection = transform.forward;
             StartCoroutine(Dash(dashDirection, dashDistance, dashDuration));
@@ -202,16 +208,19 @@ public class Player_Movement : MonoBehaviour
 
         #endregion
         #region Animations
+        
+
+        bool isRunningInput = horizontalInput != 0f || verticalInput != 0f || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         //bool isWalkingInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-        bool isRunningInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-        bool isPunchInput = Input.GetMouseButton(0);
+        //bool isRunningInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetButton("Horizontal");
+        bool isPunchInput = Input.GetMouseButton(0) || rightTriggerInput > 0f;
 
         if (isRunningInput)
         {
             //isShiftHeld = true;
             //shiftHoldTime += Time.deltaTime;
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton8)|| leftTriggerInput > 0f)
             {
                 isMach = true;
                 isWalking = false;
@@ -285,7 +294,7 @@ public class Player_Movement : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)*/)
+        if ((Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)) || ((Input.GetKey(KeyCode.JoystickButton8) && (isRunning = true))/* || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)*/))
         {
             maxBoostTimer += Time.deltaTime;
             if (maxBoostTimer >= maxBoostDelay && !isMaxBoosting)
