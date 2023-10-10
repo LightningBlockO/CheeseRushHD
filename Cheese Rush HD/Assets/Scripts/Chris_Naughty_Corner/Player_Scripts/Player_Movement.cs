@@ -197,11 +197,12 @@ public class Player_Movement : MonoBehaviour
         }
 
         // Dash
-        if (Input.GetMouseButtonDown(0) || rightTriggerInput > 0f && canDash)
+        if ((Input.GetMouseButtonDown(0) || rightTriggerInput > 0f) && canDash)
         {
             Vector3 dashDirection = transform.forward;
-            StartCoroutine(Dash(dashDirection, dashDistance, dashDuration));
             StartCoroutine(DashCooldown());
+            StartCoroutine(Dash(dashDirection, dashDistance, dashDuration));
+            
             
         }
 
