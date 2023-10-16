@@ -52,8 +52,17 @@ public class CheeseCollect : MonoBehaviour
     [Header("PlayerSTuff")]
     public PlayerRespawnManager prm;
 
+    [Header("PlayerRespawn")]
+    public GameObject respawn1;
+    public GameObject respawn2;
+    public GameObject respawn3;
+    public GameObject respawn4;
 
-
+    [Header("PlayerNewRespawn")]
+    public GameObject newRespawn1;
+    public GameObject newRespawn2;
+    public GameObject newRespawn3;
+    public GameObject newRespawn4;
     //public AudioClip lapCompleteClip;
     //public AudioClip finalLapCompleteClip;
 
@@ -134,6 +143,18 @@ public class CheeseCollect : MonoBehaviour
         {
             score += 990;
             Score();
+
+            //Respawn Stuff
+            respawn1.SetActive(false);
+            respawn2.SetActive(false);
+            respawn3.SetActive(false);
+            respawn4.SetActive(false);
+            newRespawn1.SetActive(true);
+            newRespawn2.SetActive(true);
+            newRespawn3.SetActive(true);
+            newRespawn4.SetActive(true);
+            //BreakLine
+
             cheeseFace.SetActive(true);
             cheeseFaceStart.SetActive(false);
             startTimer.SetActive(false);
