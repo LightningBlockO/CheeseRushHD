@@ -12,9 +12,9 @@ public class Begin : MonoBehaviour
             
             SceneManager.LoadScene("Stage 1 - Kitchen");
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SceneManager.LoadScene("Stage 2 - Neighbourhood");
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    SceneManager.LoadScene("Stage 2 - Neighbourhood");
+        //}
     }
 }
