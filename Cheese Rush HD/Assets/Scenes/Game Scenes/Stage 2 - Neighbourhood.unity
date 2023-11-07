@@ -34335,6 +34335,14 @@ MonoBehaviour:
   cheeseFaceStart: {fileID: 1834943246}
   startTimer: {fileID: 1439901823}
   prm: {fileID: 0}
+  respawn1: {fileID: 0}
+  respawn2: {fileID: 0}
+  respawn3: {fileID: 0}
+  respawn4: {fileID: 0}
+  newRespawn1: {fileID: 0}
+  newRespawn2: {fileID: 0}
+  newRespawn3: {fileID: 0}
+  newRespawn4: {fileID: 0}
 --- !u!95 &309588390251681208
 Animator:
   serializedVersion: 5
