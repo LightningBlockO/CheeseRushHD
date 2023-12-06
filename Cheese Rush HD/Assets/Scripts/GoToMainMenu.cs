@@ -7,7 +7,7 @@ public class GoToMainMenu : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("GoToMenu", 3);
+        Invoke("GoToMenu", 50f);
     }
     void GoToMenu()
     {
