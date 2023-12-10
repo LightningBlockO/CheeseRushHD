@@ -7,7 +7,11 @@ public class PlayerRespawnManager : MonoBehaviour
         Section1,
         Section2,
         Section3,
-        Section4
+        Section4,
+        Section6,
+        Section7,
+        Section8,
+        Section9,
     }
 
     // Create a public enum to represent the sections
@@ -20,6 +24,11 @@ public class PlayerRespawnManager : MonoBehaviour
     public Transform newRespawnPointSection2;
     public Transform newRespawnPointSection3;
     public Transform newRespawnPointSection4;
+
+    public Transform respawnPointSection6;
+    public Transform respawnPointSection7;
+    public Transform respawnPointSection8;
+    public Transform respawnPointSection9;
 
     private bool usingOriginalRespawnPoints = true;
     private Transform playerTransform;
@@ -69,6 +78,25 @@ public class PlayerRespawnManager : MonoBehaviour
                 else
                     playerTransform.position = newRespawnPointSection1.position;
                 break;
+
+                //Level 2
+
+            case RespawnSection.Section6:
+                if (usingOriginalRespawnPoints)
+                    playerTransform.position = respawnPointSection6.position;
+                break;
+            case RespawnSection.Section7:
+                if (usingOriginalRespawnPoints)
+                    playerTransform.position = respawnPointSection7.position;
+                break;
+            case RespawnSection.Section8:
+                if (usingOriginalRespawnPoints)
+                    playerTransform.position = respawnPointSection8.position;
+                break;
+            case RespawnSection.Section9:
+                if (usingOriginalRespawnPoints)
+                    playerTransform.position = respawnPointSection9.position;
+                break;
         }
     }
 
@@ -76,11 +104,16 @@ public class PlayerRespawnManager : MonoBehaviour
     public void EnableNewRespawnPoints()
     {
         Debug.Log("EnableNewRespawnPoints() called!");
-        usingOriginalRespawnPoints = false;
+        usingOriginalRespawnPoints = true;
         respawnPointSection1.gameObject.SetActive(false);
         respawnPointSection2.gameObject.SetActive(false);
         respawnPointSection3.gameObject.SetActive(false);
         respawnPointSection4.gameObject.SetActive(false);
+
+        respawnPointSection1.gameObject.SetActive(true);
+        respawnPointSection2.gameObject.SetActive(true);
+        respawnPointSection3.gameObject.SetActive(true);
+        respawnPointSection4.gameObject.SetActive(true);
 
         newRespawnPointSection1.gameObject.SetActive(true);
         newRespawnPointSection2.gameObject.SetActive(true);
