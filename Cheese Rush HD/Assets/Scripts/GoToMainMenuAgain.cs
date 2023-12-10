@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GoToMainMenu : MonoBehaviour
+public class GoToMainMenuAgain : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("GoToMenu", 50f);
-    }
-    void GoToMenu()
-    {
-        SceneManager.LoadScene("Menu Scene");
+        Invoke("GoToMenu", 72f);
     }
     private void Update()
     {
@@ -20,5 +16,9 @@ public class GoToMainMenu : MonoBehaviour
 
             SceneManager.LoadScene("Menu Scene");
         }
+    }
+    void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu Scene");
     }
 }
