@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Scenes/Stage 1 - Kitchen.unity
     guid: 3370c432f86f9ab4294343c06f6b7fa7
-  - enabled: 0
-    path: Assets/Scenes/Game Scenes/Stage 2 - Neighbourhood.unity
-    guid: e53d4170321c500458cd28a9ca09d356
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/Credits.unity
+    guid: 4cbbc67f6d5db3145a35ef4e57419c60
   m_configObjects: {}
