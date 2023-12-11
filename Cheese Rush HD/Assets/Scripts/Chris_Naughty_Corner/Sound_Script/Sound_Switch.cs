@@ -22,6 +22,7 @@ public class Sound_Switch : MonoBehaviour
             audioLevel1.SetActive(false);
             audioLevel2.SetActive(true);
             RenderSettings.skybox = skyboxLevel2;
+            Destroy(gameObject);
         }
     }
 }

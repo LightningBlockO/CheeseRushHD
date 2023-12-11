@@ -33,6 +33,7 @@ public class CheeseCollect : MonoBehaviour
     [Header("Music + Ranks")]
     public GameObject cheeserushmusic;
     public GameObject levelmusic;
+    public GameObject level2music;
     public AudioClip cheeseCollectClip;
     public AudioClip largeCheeseCollectClip;
     public GameObject rankD;
@@ -51,6 +52,7 @@ public class CheeseCollect : MonoBehaviour
 
     [Header("PlayerSTuff")]
     public PlayerRespawnManager prm;
+    public GameObject skyBoxChange;
 
     [Header("PlayerRespawn")]
     public GameObject respawn1;
@@ -66,6 +68,8 @@ public class CheeseCollect : MonoBehaviour
     //public AudioClip lapCompleteClip;
     //public AudioClip finalLapCompleteClip;
 
+    public AudioSource audioHurt;
+    public AudioClip hurtAudioClip;
 
 
 
@@ -98,6 +102,10 @@ public class CheeseCollect : MonoBehaviour
         if ((other.name.Contains("Knife") || other.name.Contains("Fork") || other.name.Contains("Fire") && !isHitAnimationPlaying))
         {
             score -= 50;
+            if (audioHurt != null && hurtAudioClip != null)
+            {
+                audioHurt.PlayOneShot(hurtAudioClip);
+            }
 
             hitScore.gameObject.SetActive(true);
             hitScoreAnime.Stop();
@@ -154,6 +162,7 @@ public class CheeseCollect : MonoBehaviour
             newRespawn3.SetActive(true);
             newRespawn4.SetActive(true);
             //BreakLine
+            skyBoxChange.SetActive(true);
 
             cheeseFace.SetActive(true);
             cheeseFaceStart.SetActive(false);
@@ -161,6 +170,7 @@ public class CheeseCollect : MonoBehaviour
             //gameObject.GetComponent<AudioSource>().Play();
             cheeserushmusic.SetActive(true);
             levelmusic.SetActive(false);
+            level2music.SetActive(false);
             //timer.SetActive(true);
             cheeserush.SetActive(true);
             finishline.SetActive(true);

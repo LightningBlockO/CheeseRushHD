@@ -83,9 +83,17 @@ public class Player_Movement : MonoBehaviour
     private float targetFOV;
     private float fovTransitionTimer;
 
-   
-    #endregion
 
+    #endregion
+    #region Audio
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip dashAudioClip;
+    public AudioSource audioJump;
+    public AudioClip jumpAudioClip;
+    public AudioSource audioHurt;
+    public AudioClip hurtAudioClip;
+    #endregion
 
     void Start()
     {
@@ -375,6 +383,11 @@ public class Player_Movement : MonoBehaviour
 
                 Vector3 backwardForce = launchDirection * launchForce;
                 rb.AddForce(backwardForce, ForceMode.Impulse);
+
+                if (audioHurt != null && hurtAudioClip != null)
+                {
+                    audioHurt.PlayOneShot(hurtAudioClip);
+                }
             }
         }
     }
@@ -394,6 +407,10 @@ public class Player_Movement : MonoBehaviour
             isJumping = true;
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Force);
+            if (audioJump != null && jumpAudioClip != null)
+            {
+                audioJump.PlayOneShot(jumpAudioClip);
+            }
             isGrounded = false;
             Analytics.CustomEvent("Jump");
             Debug.Log("event has sent");
@@ -483,7 +500,11 @@ public class Player_Movement : MonoBehaviour
         float elapsedTime = 0.0f;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = initialPosition + direction * distance;
-        
+
+        if (audioSource != null && dashAudioClip != null)
+        {
+            audioSource.PlayOneShot(dashAudioClip);
+        }
 
         while (elapsedTime < duration)
         {
