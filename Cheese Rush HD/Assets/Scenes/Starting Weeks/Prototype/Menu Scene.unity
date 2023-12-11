@@ -9426,6 +9426,7 @@ MonoBehaviour:
   solidcheesewallscheeserush: {fileID: 0}
   cheeserushmusic: {fileID: 0}
   levelmusic: {fileID: 0}
+  level2music: {fileID: 0}
   cheeseCollectClip: {fileID: 0}
   largeCheeseCollectClip: {fileID: 0}
   rankD: {fileID: 0}
@@ -9437,6 +9438,7 @@ MonoBehaviour:
   cheeseFaceStart: {fileID: 0}
   startTimer: {fileID: 0}
   prm: {fileID: 0}
+  skyBoxChange: {fileID: 0}
   respawn1: {fileID: 0}
   respawn2: {fileID: 0}
   respawn3: {fileID: 0}
@@ -9445,6 +9447,8 @@ MonoBehaviour:
   newRespawn2: {fileID: 0}
   newRespawn3: {fileID: 0}
   newRespawn4: {fileID: 0}
+  audioHurt: {fileID: 0}
+  hurtAudioClip: {fileID: 0}
 --- !u!4 &363297519
 Transform:
   m_ObjectHideFlags: 0
@@ -46834,7 +46838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -284, y: 103.55908}
+  m_AnchoredPosition: {x: -284, y: -103}
   m_SizeDelta: {x: 402.7468, y: 157.4224}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2104378481

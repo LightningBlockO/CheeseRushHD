@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1214,8 +1214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -783, y: -457}
-  m_SizeDelta: {x: 316.5046, y: 206.4965}
+  m_AnchoredPosition: {x: -345, y: -194.77}
+  m_SizeDelta: {x: 93.588, y: 60.4548}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809300705
 MonoBehaviour:
@@ -1735,8 +1735,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 679, y: 400}
-  m_SizeDelta: {x: 525.8093, y: 242.9088}
+  m_AnchoredPosition: {x: 265.32, y: 162.78}
+  m_SizeDelta: {x: 269.3557, y: 124.4346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &999595795
 Animator:
@@ -3331,8 +3331,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 349, y: -858}
-  m_SizeDelta: {x: 1248.1555, y: 134.2961}
+  m_AnchoredPosition: {x: 83.743, y: -442}
+  m_SizeDelta: {x: 632.5144, y: 134.2961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514661515
 MonoBehaviour:
@@ -3460,8 +3460,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5271,6 +5271,7 @@ MonoBehaviour:
   solidcheesewallscheeserush: {fileID: 0}
   cheeserushmusic: {fileID: 0}
   levelmusic: {fileID: 0}
+  level2music: {fileID: 0}
   cheeseCollectClip: {fileID: 0}
   largeCheeseCollectClip: {fileID: 0}
   rankD: {fileID: 0}
@@ -5282,6 +5283,7 @@ MonoBehaviour:
   cheeseFaceStart: {fileID: 0}
   startTimer: {fileID: 0}
   prm: {fileID: 0}
+  skyBoxChange: {fileID: 0}
   respawn1: {fileID: 0}
   respawn2: {fileID: 0}
   respawn3: {fileID: 0}
@@ -5290,6 +5292,8 @@ MonoBehaviour:
   newRespawn2: {fileID: 0}
   newRespawn3: {fileID: 0}
   newRespawn4: {fileID: 0}
+  audioHurt: {fileID: 0}
+  hurtAudioClip: {fileID: 0}
 --- !u!95 &1522797894340202280
 Animator:
   serializedVersion: 5
@@ -5446,6 +5450,12 @@ MonoBehaviour:
   FOVTransitionTime: 1
   maxLookAngle: 10
   babab: {fileID: 0}
+  audioSource: {fileID: 0}
+  dashAudioClip: {fileID: 0}
+  audioJump: {fileID: 0}
+  jumpAudioClip: {fileID: 0}
+  audioHurt: {fileID: 0}
+  hurtAudioClip: {fileID: 0}
 --- !u!1 &1522797894340202286
 GameObject:
   m_ObjectHideFlags: 0
